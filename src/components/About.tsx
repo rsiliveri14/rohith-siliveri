@@ -1,34 +1,23 @@
 import { Briefcase, GraduationCap } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import aboutImage from '@/assets/about.jpg';
-
 const About = () => {
-  const { ref, isVisible } = useScrollAnimation();
-
-  return (
-    <section id="about" className="py-16 px-6">
+  const {
+    ref,
+    isVisible
+  } = useScrollAnimation();
+  return <section id="about" className="py-16 px-6">
       <div className="container mx-auto">
         <div className="text-center mb-10">
           <p className="section-title-small">Get To Know More</p>
           <h2 className="section-title">About Me</h2>
         </div>
 
-        <div
-          ref={ref}
-          className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
+        <div ref={ref} className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* About Image */}
           <div className="lg:w-1/4">
             <div className="w-48 h-60 md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src={aboutImage}
-                alt="Rohith Vardhan Siliveri"
-                className="w-full h-full object-cover"
-                style={{ imageRendering: 'auto' }}
-                loading="eager"
-              />
+              <img src={aboutImage} alt="Rohith Vardhan Siliveri" className="w-full h-full object-cover border-none" />
             </div>
           </div>
 
@@ -75,8 +64,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
