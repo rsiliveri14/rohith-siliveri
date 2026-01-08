@@ -21,8 +21,8 @@ const About = () => {
         >
           {/* About Image */}
           <div className="lg:w-1/4">
-            <div className="w-48 h-60 md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl">
-              <img src={aboutImage} alt="Rohith Siliveri" className="w-full h-full object-cover" />
+            <div className="w-48 h-60 md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500">
+              <img src={aboutImage} alt="Rohith Siliveri" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
 
@@ -30,12 +30,12 @@ const About = () => {
           <div className="lg:w-3/4">
             {/* Info Cards */}
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="info-card py-4">
+              <div className="info-card py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <Briefcase className="w-6 h-6 mx-auto mb-2 text-foreground" />
                 <h3 className="font-semibold text-sm mb-0.5">Experience</h3>
                 <p className="text-muted-foreground text-xs">3+ Years</p>
               </div>
-              <div className="info-card py-4">
+              <div className="info-card py-4 hover:scale-105 hover:-translate-y-1 transition-all duration-300">
                 <GraduationCap className="w-6 h-6 mx-auto mb-2 text-foreground" />
                 <h3 className="font-semibold text-sm mb-0.5">Education</h3>
                 <p className="text-muted-foreground text-xs">M.S. Computer Science</p>
@@ -51,14 +51,14 @@ const About = () => {
 
             {/* Education Details */}
             <div className="space-y-2">
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl hover:bg-secondary/80 hover:-translate-y-0.5 transition-all duration-300">
                 <div>
                   <p className="font-medium text-sm">M.S. Computer Science (AI)</p>
                   <p className="text-xs text-muted-foreground">SUNY Binghamton, NY</p>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1 sm:mt-0">2023 – 2025</p>
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl hover:bg-secondary/80 hover:-translate-y-0.5 transition-all duration-300">
                 <div>
                   <p className="font-medium text-sm">B.Tech Computer Science</p>
                   <p className="text-xs text-muted-foreground">Anurag University, India</p>
