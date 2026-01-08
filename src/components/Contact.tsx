@@ -1,52 +1,49 @@
 import { Mail, Linkedin, Github } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Contact = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="contact" className="py-20 px-6 bg-secondary">
+    <section id="contact" className="py-16 px-6 bg-secondary">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <p className="section-title-small">Get in Touch</p>
           <h2 className="section-title">Contact Me</h2>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 max-w-2xl mx-auto">
+        <div
+          ref={ref}
+          className={`flex flex-wrap items-center justify-center gap-4 max-w-2xl mx-auto transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <a
             href="mailto:rohith.siliveri14@gmail.com"
-            className="info-card flex items-center gap-4 w-full sm:w-auto px-8 py-6 animate-fade-in-up"
+            className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
           >
-            <Mail className="w-8 h-8 text-foreground" />
-            <div className="text-left">
-              <p className="text-sm text-muted-foreground">Email</p>
-              <p className="font-medium text-foreground">rohith.siliveri14@gmail.com</p>
-            </div>
+            <Mail className="w-5 h-5 text-foreground" />
+            <span className="text-sm font-medium text-foreground">Email</span>
           </a>
 
           <a
             href="https://linkedin.com/in/rohiths14"
             target="_blank"
             rel="noopener noreferrer"
-            className="info-card flex items-center gap-4 w-full sm:w-auto px-8 py-6 animate-fade-in-up animation-delay-100"
+            className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
           >
-            <Linkedin className="w-8 h-8 text-foreground" />
-            <div className="text-left">
-              <p className="text-sm text-muted-foreground">LinkedIn</p>
-              <p className="font-medium text-foreground">linkedin.com/in/rohiths14</p>
-            </div>
+            <Linkedin className="w-5 h-5 text-foreground" />
+            <span className="text-sm font-medium text-foreground">LinkedIn</span>
           </a>
-        </div>
 
-        <div className="mt-8 flex justify-center animate-fade-in-up animation-delay-200">
           <a
             href="https://github.com/rsiliveri14"
             target="_blank"
             rel="noopener noreferrer"
-            className="info-card flex items-center gap-4 px-8 py-6"
+            className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
           >
-            <Github className="w-8 h-8 text-foreground" />
-            <div className="text-left">
-              <p className="text-sm text-muted-foreground">GitHub</p>
-              <p className="font-medium text-foreground">github.com/rsiliveri14</p>
-            </div>
+            <Github className="w-5 h-5 text-foreground" />
+            <span className="text-sm font-medium text-foreground">GitHub</span>
           </a>
         </div>
       </div>

@@ -1,66 +1,43 @@
-import { 
-  Workflow, 
-  Server, 
-  Plug, 
-  Shield, 
-  MessageSquare, 
-  CheckCircle 
-} from 'lucide-react';
+import { Workflow, Server, Plug, Shield, MessageSquare, CheckCircle } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const services = [
-  {
-    icon: Workflow,
-    title: 'End-to-end ML Development',
-    description: 'From data exploration to model deployment, building complete machine learning solutions tailored to your business needs.',
-  },
-  {
-    icon: Server,
-    title: 'Production ML & MLOps',
-    description: 'Deployment pipelines, model monitoring, CI/CD automation, and infrastructure for reliable ML systems at scale.',
-  },
-  {
-    icon: Plug,
-    title: 'AI System Integration',
-    description: 'Integrating AI capabilities into existing systems via APIs, cloud services, and containerized deployments.',
-  },
-  {
-    icon: Shield,
-    title: 'Fraud Detection & Risk Modeling',
-    description: 'Specialized solutions for financial services including real-time fraud detection and risk assessment systems.',
-  },
-  {
-    icon: MessageSquare,
-    title: 'NLP, LLM & Computer Vision',
-    description: 'Custom solutions using transformers, LLMs, and computer vision for text and image-based applications.',
-  },
-  {
-    icon: CheckCircle,
-    title: 'Model Governance & Explainability',
-    description: 'Ensuring model reliability, interpretability, and compliance with regulatory requirements.',
-  },
+  { icon: Workflow, title: 'End-to-end ML', description: 'Complete ML solutions from data to deployment.' },
+  { icon: Server, title: 'MLOps', description: 'CI/CD, monitoring, and infrastructure at scale.' },
+  { icon: Plug, title: 'AI Integration', description: 'APIs, cloud services, and containerized deployments.' },
+  { icon: Shield, title: 'Fraud & Risk', description: 'Real-time fraud detection and risk assessment.' },
+  { icon: MessageSquare, title: 'NLP & Vision', description: 'LLMs, transformers, and computer vision solutions.' },
+  { icon: CheckCircle, title: 'Governance', description: 'Explainability, reliability, and compliance.' },
 ];
 
 const Services = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="services" className="py-20 px-6">
+    <section id="services" className="py-16 px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <p className="section-title-small">What I Offer</p>
           <h2 className="section-title">Services</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div
+          ref={ref}
+          className={`grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
               <div
                 key={index}
-                className="info-card text-left animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-card border border-border rounded-xl p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <IconComponent className="w-10 h-10 text-foreground mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">{service.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+                <IconComponent className="w-8 h-8 text-foreground mx-auto mb-2" />
+                <h3 className="font-semibold text-foreground text-sm mb-1">{service.title}</h3>
+                <p className="text-muted-foreground text-xs">{service.description}</p>
               </div>
             );
           })}
