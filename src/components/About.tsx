@@ -1,6 +1,6 @@
 import { Briefcase, GraduationCap } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import aboutImage from '@/assets/about-photo.png';
+import aboutImage from '@/assets/profile.jpg';
 const About = () => {
   const {
     ref,
@@ -16,11 +16,11 @@ const About = () => {
         <div ref={ref} className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* About Image */}
           <div className="flex-shrink-0">
-            <div className="w-56 md:w-64 lg:w-72 rounded-2xl overflow-hidden shadow-xl">
+            <div className="w-72 md:w-80 lg:w-96 rounded-2xl overflow-hidden shadow-xl">
               <img 
                 src={aboutImage} 
                 alt="Rohith Vardhan Siliveri" 
-                className="w-full h-auto object-contain border-none" 
+                className="w-full h-auto object-cover border-none" 
                 style={{ imageRendering: 'auto' }}
                 loading="eager"
               />
