@@ -57,7 +57,7 @@ const Hero = () => {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center justify-center md:flex md:items-center md:justify-start gap-3">
+            <div className="flex items-center justify-center gap-3">
               <a
                 href="https://linkedin.com/in/rohiths14"
                 target="_blank"
