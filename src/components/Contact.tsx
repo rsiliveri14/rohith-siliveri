@@ -51,7 +51,7 @@ const Contact = () => {
               rows={4}
               required
             />
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full hover:scale-[1.02] transition-transform duration-300">
               <Send size={16} className="mr-2" />
               Send Message
             </Button>
@@ -60,16 +60,16 @@ const Contact = () => {
           <div className="space-y-3">
             <a
               href="mailto:rohith.siliveri14@gmail.com"
-              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
+              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
             >
-              <Mail className="w-5 h-5" />
+              <Mail className="w-5 h-5 transition-transform group-hover:scale-110" />
               <span className="text-sm">rohith.siliveri14@gmail.com</span>
             </a>
             <a
               href="https://linkedin.com/in/rohiths14"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
+              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
             >
               <Linkedin className="w-5 h-5" />
               <span className="text-sm">linkedin.com/in/rohiths14</span>
@@ -78,7 +78,7 @@ const Contact = () => {
               href="https://github.com/rsiliveri14"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg transition-all hover:-translate-y-1"
+              className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 hover:shadow-lg hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
             >
               <Github className="w-5 h-5" />
               <span className="text-sm">github.com/rsiliveri14</span>
