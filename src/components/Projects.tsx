@@ -61,7 +61,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 transition-all duration-300"
+              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
