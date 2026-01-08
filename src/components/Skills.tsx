@@ -1,25 +1,47 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { Brain, Code, Settings, Cloud, Server, Database, Target } from 'lucide-react';
 
 const skillCategories = [
   {
-    title: 'ML & AI',
-    skills: ['Applied ML', 'NLP', 'Computer Vision', 'Time-series'],
+    title: 'Machine Learning & AI',
+    icon: Brain,
+    skills: [
+      'Machine Learning',
+      'Applied AI',
+      'NLP (BERT, Transformers, LLMs)',
+      'Computer Vision (OpenCV, ResNet)',
+      'Time-Series Forecasting',
+    ],
   },
   {
-    title: 'Languages',
-    skills: ['Python', 'SQL', 'PyTorch', 'scikit-learn'],
+    title: 'Languages & Frameworks',
+    icon: Code,
+    skills: ['Python', 'SQL', 'PyTorch', 'scikit-learn', 'XGBoost'],
   },
   {
-    title: 'MLOps',
-    skills: ['CI/CD', 'Docker', 'Kubernetes', 'FastAPI'],
+    title: 'MLOps & Engineering',
+    icon: Settings,
+    skills: ['CI/CD Pipelines', 'Automated Retraining', 'Model Monitoring', 'MLflow', 'Feast'],
   },
   {
-    title: 'Cloud',
-    skills: ['Azure ML', 'AWS SageMaker', 'Spark', 'Kafka'],
+    title: 'Deployment & Services',
+    icon: Server,
+    skills: ['Docker', 'Kubernetes', 'FastAPI', 'Model APIs', 'Microservices'],
   },
   {
-    title: 'Domain',
-    skills: ['Fraud Detection', 'Risk Modeling', 'Model Governance'],
+    title: 'Cloud Platforms',
+    icon: Cloud,
+    skills: ['Azure Machine Learning', 'AWS SageMaker'],
+  },
+  {
+    title: 'Big Data & Streaming',
+    icon: Database,
+    skills: ['Apache Spark', 'Kafka'],
+  },
+  {
+    title: 'Domains & Specialties',
+    icon: Target,
+    skills: ['Fraud Detection', 'Risk Modeling', 'Explainable AI', 'Model Governance', 'Regulated Systems'],
   },
 ];
 
@@ -27,38 +49,49 @@ const Skills = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="skills" className="py-16 px-6">
-      <div className="container mx-auto">
+    <section id="skills" className="py-16 px-6 bg-secondary/30">
+      <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-10">
-          <p className="section-title-small">Explore My</p>
-          <h2 className="section-title">Skills</h2>
+          <p className="section-title-small">What I Work With</p>
+          <h2 className="section-title">Technical Arsenal</h2>
+          <p className="text-muted-foreground text-sm mt-3 max-w-2xl mx-auto">
+            Technologies, tools, and frameworks I use to build reliable and production-ready machine learning systems.
+          </p>
         </div>
 
         <div
           ref={ref}
-          className={`grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto transition-all duration-700 ${
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {skillCategories.map((category, catIndex) => (
-            <div
-              key={catIndex}
-              className="bg-card border border-border rounded-xl p-4"
-              style={{ transitionDelay: `${catIndex * 100}ms` }}
-            >
-              <h3 className="font-semibold text-foreground text-sm mb-3 text-center">{category.title}</h3>
-              <div className="flex flex-wrap gap-1.5 justify-center">
-                {category.skills.map((skill, skillIndex) => (
-                  <span
-                    key={skillIndex}
-                    className="px-2 py-1 bg-secondary text-muted-foreground text-xs rounded-full"
-                  >
-                    {skill}
-                  </span>
-                ))}
+          {skillCategories.map((category, catIndex) => {
+            const IconComponent = category.icon;
+            return (
+              <div
+                key={catIndex}
+                className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-colors duration-300"
+                style={{ transitionDelay: `${catIndex * 50}ms` }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                    <IconComponent className="w-4 h-4" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-sm">{category.title}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <span
+                      key={skillIndex}
+                      className="px-3 py-1.5 bg-secondary text-muted-foreground text-xs rounded-full border border-border/50 hover:border-primary/40 hover:text-foreground transition-colors duration-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
