@@ -5,12 +5,13 @@ import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Services from '@/components/Services';
+import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       <Navbar />
       <main>
         <Hero />
@@ -19,6 +20,7 @@ const Index = () => {
         <Skills />
         <Projects />
         <Services />
+        <Blog />
         <Contact />
       </main>
       <Footer />

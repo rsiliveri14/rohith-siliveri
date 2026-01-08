@@ -1,4 +1,5 @@
 import { Building2, Calendar } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const experiences = [
   {
@@ -9,9 +10,7 @@ const experiences = [
     highlights: [
       'Real-time fraud detection systems',
       'Scalable MLOps pipelines on Azure',
-      'Kubernetes-based deployments with Docker & FastAPI',
-      'Model monitoring, drift detection, and governance',
-      'Cross-functional collaboration with fraud, risk, and platform teams',
+      'Kubernetes deployments with Docker & FastAPI',
     ],
   },
   {
@@ -23,8 +22,6 @@ const experiences = [
       'Computer vision for claims automation',
       'ML-based claims triage and churn prediction',
       'AWS SageMaker deployments',
-      'Spark pipelines and API-based ML services',
-      'Long-term model monitoring and reliability',
     ],
   },
   {
@@ -35,65 +32,54 @@ const experiences = [
     highlights: [
       'Fraud detection and risk analytics',
       'Customer segmentation and A/B testing',
-      'Time-series forecasting',
-      'Dashboards and automated reporting',
     ],
   },
 ];
 
 const Experience = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="experience" className="py-20 px-6 bg-secondary">
+    <section id="experience" className="py-16 px-6 bg-secondary">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <p className="section-title-small">My Journey</p>
           <h2 className="section-title">Experience</h2>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-border" />
-
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className={`relative flex flex-col md:flex-row gap-8 mb-12 animate-fade-in-up ${
-                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-foreground rounded-full border-4 border-background" />
-
-                {/* Content */}
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'} pl-8 md:pl-0`}>
-                  <div className="bg-card p-6 rounded-2xl shadow-lg border border-border">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Building2 size={18} className="text-muted-foreground" />
-                      <span className="font-semibold text-foreground">{exp.company}</span>
-                    </div>
-                    <h3 className="text-xl font-bold text-foreground mb-1">{exp.role}</h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                      <Calendar size={14} />
-                      <span>{exp.period}</span>
-                      <span>•</span>
-                      <span>{exp.location}</span>
-                    </div>
-                    <ul className="space-y-2">
-                      {exp.highlights.map((highlight, i) => (
-                        <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                          <span className="text-foreground mt-1.5">•</span>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+        <div
+          ref={ref}
+          className={`max-w-3xl mx-auto space-y-4 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          {experiences.map((exp, index) => (
+            <div
+              key={index}
+              className="bg-card p-5 rounded-xl shadow-sm border border-border"
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Building2 size={16} className="text-muted-foreground" />
+                  <span className="font-semibold text-foreground text-sm">{exp.company}</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1 sm:mt-0">
+                  <Calendar size={12} />
+                  <span>{exp.period}</span>
                 </div>
               </div>
-            ))}
-          </div>
+              <h3 className="font-bold text-foreground mb-2">{exp.role}</h3>
+              <ul className="space-y-1">
+                {exp.highlights.map((highlight, i) => (
+                  <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
+                    <span className="text-foreground mt-1">•</span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>

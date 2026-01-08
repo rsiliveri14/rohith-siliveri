@@ -1,5 +1,6 @@
-import { ExternalLink, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import fraudImage from '@/assets/fraud-detection.jpg';
 import mlopsImage from '@/assets/mlops.jpg';
 import nlpImage from '@/assets/nlp.jpg';
@@ -8,53 +9,56 @@ import cvImage from '@/assets/computer-vision.jpg';
 const projects = [
   {
     title: 'Fraud Detection System',
-    description: 'Tree-based models and behavioral features focused on performance, scalability, and interpretability for real-time fraud detection.',
+    description: 'Real-time fraud detection with tree-based models and behavioral features.',
     image: fraudImage,
-    tags: ['Python', 'XGBoost', 'FastAPI', 'Docker'],
+    tags: ['XGBoost', 'FastAPI', 'Docker'],
     github: 'https://github.com/rsiliveri14',
   },
   {
-    title: 'MLOps Pipeline Framework',
-    description: 'Automated training, validation, CI/CD pipelines, and monitoring best practices for production ML systems.',
+    title: 'MLOps Pipeline',
+    description: 'Automated training, validation, and CI/CD for production ML.',
     image: mlopsImage,
-    tags: ['MLflow', 'Kubernetes', 'Azure', 'Python'],
+    tags: ['MLflow', 'Kubernetes', 'Azure'],
     github: 'https://github.com/rsiliveri14',
   },
   {
-    title: 'NLP & LLM Applications',
-    description: 'Transformer-based classification, summarization, and LLM API integrations for enterprise use cases.',
+    title: 'NLP Applications',
+    description: 'Transformer-based classification and LLM integrations.',
     image: nlpImage,
-    tags: ['PyTorch', 'Transformers', 'BERT', 'FastAPI'],
+    tags: ['PyTorch', 'BERT', 'Transformers'],
     github: 'https://github.com/rsiliveri14',
   },
   {
-    title: 'Computer Vision Pipeline',
-    description: 'Image-based ML solutions for damage assessment and classification in insurance claims processing.',
+    title: 'Computer Vision',
+    description: 'Image-based solutions for damage assessment in insurance.',
     image: cvImage,
-    tags: ['OpenCV', 'ResNet', 'AWS SageMaker', 'Python'],
+    tags: ['OpenCV', 'ResNet', 'SageMaker'],
     github: 'https://github.com/rsiliveri14',
   },
 ];
 
 const Projects = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="projects" className="py-20 px-6 bg-secondary">
+    <section id="projects" className="py-16 px-6 bg-secondary">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <p className="section-title-small">Browse My Recent</p>
+        <div className="text-center mb-10">
+          <p className="section-title-small">Browse My</p>
           <h2 className="section-title">Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            A collection of applied machine learning and MLOps projects demonstrating end-to-end 
-            workflows, from data preprocessing to deployment and monitoring.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div
+          ref={ref}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {projects.map((project, index) => (
             <div
               key={index}
-              className="project-card animate-fade-in-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="project-card"
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="aspect-video overflow-hidden">
                 <img
@@ -63,34 +67,30 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
+              <div className="p-4">
+                <h3 className="font-bold text-foreground mb-1">{project.title}</h3>
+                <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
+                <div className="flex flex-wrap gap-1.5 mb-3">
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-3 py-1 bg-muted text-muted-foreground text-xs rounded-full"
+                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-full flex items-center gap-2"
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github size={16} />
-                      View Code
-                    </a>
-                  </Button>
-                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full flex items-center gap-2 text-xs"
+                  asChild
+                >
+                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <Github size={14} />
+                    View Code
+                  </a>
+                </Button>
               </div>
             </div>
           ))}

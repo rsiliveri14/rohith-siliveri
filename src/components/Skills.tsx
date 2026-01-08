@@ -1,90 +1,61 @@
-import { 
-  Brain, 
-  Code, 
-  Server, 
-  Cloud, 
-  Shield, 
-  Database,
-  Cpu,
-  GitBranch,
-  Container,
-  Workflow,
-  LineChart,
-  Eye
-} from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const skillCategories = [
   {
-    title: 'Machine Learning & AI',
-    skills: [
-      { name: 'Applied ML', level: 'Experienced', icon: Brain },
-      { name: 'NLP & Transformers', level: 'Experienced', icon: Code },
-      { name: 'Computer Vision', level: 'Experienced', icon: Eye },
-      { name: 'Time-series Forecasting', level: 'Experienced', icon: LineChart },
-    ],
+    title: 'ML & AI',
+    skills: ['Applied ML', 'NLP', 'Computer Vision', 'Time-series'],
   },
   {
-    title: 'Programming & Frameworks',
-    skills: [
-      { name: 'Python', level: 'Experienced', icon: Code },
-      { name: 'SQL', level: 'Experienced', icon: Database },
-      { name: 'PyTorch', level: 'Experienced', icon: Cpu },
-      { name: 'scikit-learn', level: 'Experienced', icon: Brain },
-    ],
+    title: 'Languages',
+    skills: ['Python', 'SQL', 'PyTorch', 'scikit-learn'],
   },
   {
-    title: 'MLOps & Engineering',
-    skills: [
-      { name: 'CI/CD Pipelines', level: 'Experienced', icon: Workflow },
-      { name: 'Model Monitoring', level: 'Experienced', icon: LineChart },
-      { name: 'Docker & K8s', level: 'Experienced', icon: Container },
-      { name: 'FastAPI', level: 'Experienced', icon: Server },
-    ],
+    title: 'MLOps',
+    skills: ['CI/CD', 'Docker', 'Kubernetes', 'FastAPI'],
   },
   {
-    title: 'Cloud & Data',
-    skills: [
-      { name: 'Azure ML', level: 'Experienced', icon: Cloud },
-      { name: 'AWS SageMaker', level: 'Experienced', icon: Cloud },
-      { name: 'Apache Spark', level: 'Experienced', icon: Database },
-      { name: 'Kafka', level: 'Intermediate', icon: Server },
-    ],
+    title: 'Cloud',
+    skills: ['Azure ML', 'AWS SageMaker', 'Spark', 'Kafka'],
   },
   {
-    title: 'Domain Expertise',
-    skills: [
-      { name: 'Fraud Detection', level: 'Experienced', icon: Shield },
-      { name: 'Risk Modeling', level: 'Experienced', icon: LineChart },
-      { name: 'Model Governance', level: 'Experienced', icon: GitBranch },
-      { name: 'Explainable AI', level: 'Experienced', icon: Brain },
-    ],
+    title: 'Domain',
+    skills: ['Fraud Detection', 'Risk Modeling', 'Model Governance'],
   },
 ];
 
 const Skills = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   return (
-    <section id="skills" className="py-20 px-6">
+    <section id="skills" className="py-16 px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <p className="section-title-small">Explore My</p>
           <h2 className="section-title">Skills</h2>
         </div>
 
-        <div className="space-y-12">
+        <div
+          ref={ref}
+          className={`grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {skillCategories.map((category, catIndex) => (
-            <div key={catIndex} className="animate-fade-in-up" style={{ animationDelay: `${catIndex * 0.1}s` }}>
-              <h3 className="text-xl font-semibold text-foreground mb-6 text-center">{category.title}</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {category.skills.map((skill, skillIndex) => {
-                  const IconComponent = skill.icon;
-                  return (
-                    <div key={skillIndex} className="skill-card">
-                      <IconComponent className="w-8 h-8 text-foreground" />
-                      <h4 className="font-medium text-foreground text-center">{skill.name}</h4>
-                      <span className="text-sm text-muted-foreground">{skill.level}</span>
-                    </div>
-                  );
-                })}
+            <div
+              key={catIndex}
+              className="bg-card border border-border rounded-xl p-4"
+              style={{ transitionDelay: `${catIndex * 100}ms` }}
+            >
+              <h3 className="font-semibold text-foreground text-sm mb-3 text-center">{category.title}</h3>
+              <div className="flex flex-wrap gap-1.5 justify-center">
+                {category.skills.map((skill, skillIndex) => (
+                  <span
+                    key={skillIndex}
+                    className="px-2 py-1 bg-secondary text-muted-foreground text-xs rounded-full"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
