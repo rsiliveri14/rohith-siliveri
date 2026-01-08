@@ -12,29 +12,30 @@ export const useScrollAnimation = (threshold = 0.3) => {
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        
+
         if (entry.isIntersecting) {
-          // Element is entering viewport - animate in
+          // Element is entering (or near) the viewport - animate in
           setIsVisible(true);
           hasAnimatedRef.current = true;
         } else if (hasAnimatedRef.current) {
-          // Reset if element is out of view (less strict threshold)
+          // Reset only when the user is clearly far away (so content doesn't flicker)
           const rect = entry.boundingClientRect;
           const viewportHeight = window.innerHeight;
-          
-          // Reset when element is just outside viewport (20% buffer)
+
           const isFarAbove = rect.bottom < -viewportHeight * 0.2;
           const isFarBelow = rect.top > viewportHeight * 1.2;
-          
+
           if (isFarAbove || isFarBelow) {
             setIsVisible(false);
             hasAnimatedRef.current = false;
           }
         }
       },
-      { 
+      {
         threshold,
-        rootMargin: '0px 0px -5% 0px'
+        // Expand the viewport so re-entering content becomes visible immediately
+        // (prevents the user from seeing "hidden" content while scrolling back)
+        rootMargin: '20% 0px 20% 0px',
       }
     );
 
