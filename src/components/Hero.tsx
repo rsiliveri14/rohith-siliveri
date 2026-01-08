@@ -1,14 +1,21 @@
 import { Linkedin, Github, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import profileImage from "@/assets/profile.jpg";
 
 const Hero = () => {
+  const { ref, isVisible } = useScrollAnimation(0.2);
+
   return (
-    <section className="w-full py-8 px-6 flex items-center justify-center">
+    <section ref={ref} className="w-full py-8 px-6 flex items-center justify-center">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
           {/* Profile Image with fade-in + zoom animation */}
-          <div className="animate-fade-in-scale">
+          <div 
+            className={`transition-all duration-700 ease-out ${
+              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+          >
             <div className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-xl">
               <img
                 src={profileImage}
@@ -25,22 +32,41 @@ const Hero = () => {
           {/* Hero Content */}
           <div className="text-center md:text-left">
             {/* Hello text */}
-            <p className="mb-1 font-extrabold font-serif text-muted-foreground text-left mx-[110px] text-2xl opacity-0 animate-fade-in-up">
+            <p 
+              className={`mb-1 font-extrabold font-serif text-muted-foreground text-left mx-[110px] text-2xl transition-all duration-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
               Hello, I'm
             </p>
             
             {/* Name with staggered animation */}
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-2 opacity-0 animate-fade-in-up animation-delay-100">
+            <h1 
+              className={`text-3xl md:text-5xl font-bold text-foreground mb-2 transition-all duration-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '100ms' }}
+            >
               Rohith Siliveri
             </h1>
             
             {/* Title with more delay */}
-            <h2 className="text-lg md:text-xl mb-4 font-extrabold font-serif bg-primary-foreground text-muted-foreground text-left px-0 mx-[80px] opacity-0 animate-fade-in-up animation-delay-200">
+            <h2 
+              className={`text-lg md:text-xl mb-4 font-extrabold font-serif bg-primary-foreground text-muted-foreground text-left px-0 mx-[80px] transition-all duration-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '200ms' }}
+            >
               AI / ML Engineer
             </h2>
 
             {/* CTA Buttons with animation */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start mb-6 gap-[40px] opacity-0 animate-fade-in-up animation-delay-300">
+            <div 
+              className={`flex flex-wrap items-center justify-center md:justify-start mb-6 gap-[40px] transition-all duration-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '300ms' }}
+            >
               <Button
                 variant="outline"
                 size="sm"
@@ -59,7 +85,12 @@ const Hero = () => {
             </div>
 
             {/* Social Links with animation */}
-            <div className="flex items-center justify-center gap-3 -ml-[26px] opacity-0 animate-fade-in-up animation-delay-400">
+            <div 
+              className={`flex items-center justify-center gap-3 -ml-[26px] transition-all duration-500 ease-out ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '400ms' }}
+            >
               <a
                 href="https://linkedin.com/in/rohiths14"
                 target="_blank"

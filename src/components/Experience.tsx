@@ -40,34 +40,37 @@ const Experience = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   const getAnimationClass = (index: number) => {
-    // 1st (index 0) and 3rd (index 2) animate from left, 2nd (index 1) from right
-    if (index === 1) {
+    // 1st (index 0) slides from left slowly, 2nd and 3rd (index 1, 2) slide from right
+    if (index === 0) {
       return isVisible 
         ? 'opacity-100 translate-x-0' 
-        : 'opacity-0 translate-x-12';
+        : 'opacity-0 -translate-x-16';
     }
     return isVisible 
       ? 'opacity-100 translate-x-0' 
-      : 'opacity-0 -translate-x-12';
+      : 'opacity-0 translate-x-16';
   };
 
   return (
     <section id="experience" className="w-full py-8 px-6 bg-secondary">
       <div className="container mx-auto">
-        <div className="text-center mb-10">
+        {/* Animated section header */}
+        <div 
+          ref={ref}
+          className={`text-center mb-10 transition-all duration-500 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
           <p className="section-title-small">My Journey</p>
           <h2 className="section-title">Experience</h2>
         </div>
 
-        <div
-          ref={ref}
-          className="max-w-3xl mx-auto space-y-4"
-        >
+        <div className="max-w-3xl mx-auto space-y-4">
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className={`bg-card p-5 rounded-xl shadow-sm border border-border transition-all duration-500 ease-in-out ${getAnimationClass(index)}`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              className={`bg-card p-5 rounded-xl shadow-sm border border-border transition-all duration-700 ease-out ${getAnimationClass(index)}`}
+              style={{ transitionDelay: `${150 + index * 200}ms` }}
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                 <div className="flex items-center gap-2">
