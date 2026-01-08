@@ -1,28 +1,29 @@
-import { Briefcase, GraduationCap } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import aboutImage from "@/assets/about.jpg";
-
+import { Briefcase, GraduationCap } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import aboutImage from '@/assets/about.jpg';
 const About = () => {
-  const { ref, isVisible } = useScrollAnimation();
-
-  return (
-    <section id="about" className="py-16 px-6">
+  const {
+    ref,
+    isVisible
+  } = useScrollAnimation();
+  return <section id="about" className="py-16 px-6">
       <div className="container mx-auto">
         <div className="text-center mb-10">
           <p className="section-title-small">Get To Know More</p>
           <h2 className="section-title">About Me</h2>
         </div>
 
-        <div
-          ref={ref}
-          className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div ref={ref} className={`flex flex-col lg:flex-row items-center gap-10 lg:gap-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* About Image */}
           <div className="lg:w-1/4">
-            <div className="w-Auto h-Auto md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl">
-              <img src={aboutImage} alt="Rohith Vardhan Siliveri" className="w-full h-full object-cover" />
+            <div className="w-52 md:w-64 rounded-2xl overflow-hidden shadow-xl">
+              <img 
+                src={aboutImage} 
+                alt="Rohith Vardhan Siliveri" 
+                className="w-full h-auto object-contain border-none" 
+                style={{ imageRendering: 'auto' }}
+                loading="eager"
+              />
             </div>
           </div>
 
@@ -44,9 +45,9 @@ const About = () => {
 
             {/* Bio */}
             <p className="text-muted-foreground text-sm leading-relaxed text-center lg:text-left mb-6">
-              AI/ML Engineer with 3+ years of experience building and deploying machine learning systems in finance and
-              insurance. Experienced across the full ML lifecycle, with a strong focus on fraud detection, MLOps, and
-              reliable, scalable AI solutions.
+              AI/ML Engineer with 3+ years of experience building and deploying machine learning 
+              systems in finance and insurance. Experienced across the full ML lifecycle, with a 
+              strong focus on fraud detection, MLOps, and reliable, scalable AI solutions.
             </p>
 
             {/* Education Details */}
@@ -69,8 +70,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
