@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
           {/* Profile Image */}
           <div className="animate-slide-in-left">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-border shadow-xl">
+            <div className="w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-border shadow-xl">
               <img
                 src={profileImage}
                 alt="Rohith Vardhan Siliveri"
