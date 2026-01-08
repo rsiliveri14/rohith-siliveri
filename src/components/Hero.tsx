@@ -1,6 +1,6 @@
-import { Linkedin, Github, Mail, Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import profileImage from '@/assets/profile.jpg';
+import { Linkedin, Github, Mail, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import profileImage from "@/assets/profile.jpg";
 
 const Hero = () => {
   return (
@@ -14,7 +14,7 @@ const Hero = () => {
                 src={profileImage}
                 alt="Rohith Vardhan Siliveri"
                 className="w-full h-full object-cover"
-                style={{ imageRendering: 'auto' }}
+                style={{ imageRendering: "auto" }}
                 loading="eager"
               />
             </div>
@@ -23,12 +23,8 @@ const Hero = () => {
           {/* Hero Content */}
           <div className="text-center md:text-left animate-slide-in-right">
             <p className="text-muted-foreground text-sm mb-1">Hello, I'm</p>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-2">
-              Rohith Vardhan Siliveri
-            </h1>
-            <h2 className="text-lg md:text-xl font-medium text-muted-foreground mb-4">
-              AI / ML Engineer
-            </h2>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-2">Rohith Siliveri</h1>
+            <h2 className="text-lg md:text-xl font-medium text-muted-foreground mb-4">AI / ML Engineer</h2>
             <p className="text-muted-foreground max-w-md mb-6 text-sm leading-relaxed">
               Building production-ready machine learning systems for real-world impact.
             </p>
