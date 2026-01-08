@@ -70,7 +70,7 @@ const Skills = () => {
             return (
               <div
                 key={catIndex}
-                className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-colors duration-300"
+                className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
                 style={{ transitionDelay: `${catIndex * 50}ms` }}
               >
                 <div className="flex items-center gap-3 mb-4">

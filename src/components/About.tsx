@@ -16,7 +16,7 @@ const About = () => {
         <div ref={ref} className={`flex flex-col items-center gap-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* About Image */}
           <div className="flex-shrink-0">
-            <div className="w-72 md:w-80 lg:w-96 rounded-2xl overflow-hidden shadow-xl">
+            <div className="w-56 md:w-64 lg:w-72 rounded-2xl overflow-hidden shadow-xl">
               <img 
                 src={aboutImage} 
                 alt="Rohith Vardhan Siliveri" 
