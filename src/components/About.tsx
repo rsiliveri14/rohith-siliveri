@@ -1,6 +1,6 @@
 import { Briefcase, GraduationCap } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import aboutImage from '@/assets/about-profile.png';
+import aboutImage from '@/assets/about-photo.png';
 const About = () => {
   const {
     ref,
