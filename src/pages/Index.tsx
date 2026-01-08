@@ -27,11 +27,13 @@ const Index = () => {
         <section className="snap-start min-h-screen flex items-center">
           <Projects />
         </section>
-        <section className="snap-start min-h-screen flex items-center">
-          <Contact />
+        <section className="snap-start min-h-screen flex flex-col">
+          <div className="flex-1 flex items-center">
+            <Contact />
+          </div>
+          <Footer />
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
