@@ -6,7 +6,7 @@ const About = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return <section id="about" className="py-16 px-6">
+  return <section id="about" className="py-10 px-6">
       <div className="container mx-auto">
         <div className="text-center mb-10">
           <p className="section-title-small">Get To Know More</p>
