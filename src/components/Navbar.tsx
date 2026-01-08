@@ -38,7 +38,7 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="nav-link text-sm">
+              <a key={link.href} href={link.href} className="nav-link text-sm font-semibold">
                 {link.label}
               </a>
             ))}
@@ -71,7 +71,7 @@ const Navbar = () => {
           <div className="md:hidden mt-3 pb-3 animate-fade-in">
             <div className="flex flex-col gap-3">
               {navLinks.map((link) => (
-                <a key={link.href} href={link.href} className="nav-link py-1 text-sm" onClick={() => setIsOpen(false)}>
+                <a key={link.href} href={link.href} className="nav-link py-1 text-sm font-semibold" onClick={() => setIsOpen(false)}>
                   {link.label}
                 </a>
               ))}
