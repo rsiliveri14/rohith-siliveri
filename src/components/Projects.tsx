@@ -36,6 +36,17 @@ const projects = [
     tags: ['Python', 'Pandas', 'scikit-learn', 'Matplotlib'],
     github: 'https://github.com/rsiliveri14',
   },
+  {
+    title: 'Super Bowl Ads Analysis',
+    description: 'A data analysis project focused on understanding trends and patterns in Super Bowl advertising campaigns.',
+    details: [
+      'Cleaned and explored structured datasets related to Super Bowl advertisements',
+      'Analyzed engagement, themes, and temporal trends across ads',
+      'Used visualizations to communicate insights and patterns clearly',
+    ],
+    tags: ['Python', 'Pandas', 'Data Analysis', 'Visualization'],
+    github: 'https://github.com/rsiliveri14',
+  },
 ];
 
 const Projects = () => {
@@ -43,7 +54,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="w-full py-8 px-6 bg-secondary">
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-8">
           <p className="section-title-small">Browse My</p>
           <h2 className="section-title">Projects</h2>
@@ -54,55 +65,53 @@ const Projects = () => {
 
         <div
           ref={ref}
-          className={`space-y-4 transition-all duration-700 ${
+          className={`grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer"
+              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                <div className="flex-1">
-                  <h3 className="font-semibold text-foreground text-base mb-1.5">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-                  
-                  <ul className="text-muted-foreground text-xs space-y-1 mb-3">
-                    {project.details.map((detail, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-foreground mt-1">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="flex-1">
+                <h3 className="font-semibold text-foreground text-base mb-1.5">{project.title}</h3>
+                <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
+                
+                <ul className="text-muted-foreground text-xs space-y-1 mb-3">
+                  {project.details.map((detail, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="text-foreground mt-1">•</span>
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
 
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full flex items-center gap-2 text-xs shrink-0 self-start"
-                  asChild
-                >
-                  <a href={project.github} target="_blank" rel="noopener noreferrer">
-                    <Github size={14} />
-                    GitHub
-                    <ExternalLink size={12} />
-                  </a>
-                </Button>
               </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full flex items-center gap-2 text-xs w-fit"
+                asChild
+              >
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                  <Github size={14} />
+                  GitHub
+                  <ExternalLink size={12} />
+                </a>
+              </Button>
             </div>
           ))}
         </div>
