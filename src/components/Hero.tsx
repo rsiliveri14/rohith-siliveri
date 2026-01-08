@@ -8,11 +8,11 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
           {/* Profile Image */}
           <div className="animate-slide-in-left">
-            <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-xl hover:shadow-2xl transition-shadow duration-300 animate-float">
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-border shadow-xl">
               <img
                 src={profileImage}
                 alt="Rohith Vardhan Siliveri"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover"
                 style={{
                   imageRendering: "auto",
                 }}
@@ -36,18 +36,24 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full px-5 border-2 border-foreground text-foreground hover:bg-foreground hover:text-background hover:scale-105 transition-all duration-300"
+                className="rounded-full px-5 border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all"
                 asChild
               >
                 <a href="#projects">View Projects</a>
               </Button>
               <Button
                 size="sm"
-                className="rounded-full px-5 bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-300"
+                className="rounded-full px-5 bg-foreground text-background hover:bg-foreground/90 transition-all"
                 asChild
               >
                 <a href="#contact">Contact Me</a>
               </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full px-5 border border-border hover:bg-secondary transition-all flex items-center gap-2"
+                asChild
+              ></Button>
             </div>
 
             {/* Social Links */}
@@ -56,7 +62,7 @@ const Hero = () => {
                 href="https://linkedin.com/in/rohiths14"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full border border-border hover:bg-secondary hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
@@ -65,14 +71,14 @@ const Hero = () => {
                 href="https://github.com/rsiliveri14"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full border border-border hover:bg-secondary hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
                 aria-label="GitHub"
               >
                 <Github size={18} />
               </a>
               <a
                 href="mailto:rohith.siliveri14@gmail.com"
-                className="p-2 rounded-full border border-border hover:bg-secondary hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
                 aria-label="Email"
               >
                 <Mail size={18} />

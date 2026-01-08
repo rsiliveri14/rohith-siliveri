@@ -56,10 +56,8 @@ const Experience = () => {
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className={`bg-card p-5 rounded-xl shadow-sm border border-border hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-300 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-              }`}
-              style={{ transitionDelay: `${index * 150}ms`, transitionDuration: '500ms' }}
+              className="bg-card p-5 rounded-xl shadow-sm border border-border"
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                 <div className="flex items-center gap-2">
