@@ -18,13 +18,13 @@ export const useScrollAnimation = (threshold = 0.3) => {
           setIsVisible(true);
           hasAnimatedRef.current = true;
         } else if (hasAnimatedRef.current) {
-          // Only reset if element is far out of view
+          // Reset if element is out of view (less strict threshold)
           const rect = entry.boundingClientRect;
           const viewportHeight = window.innerHeight;
           
-          // Reset only if element is more than 50% of viewport height away
-          const isFarAbove = rect.bottom < -viewportHeight * 0.5;
-          const isFarBelow = rect.top > viewportHeight * 1.5;
+          // Reset when element is just outside viewport (20% buffer)
+          const isFarAbove = rect.bottom < -viewportHeight * 0.2;
+          const isFarBelow = rect.top > viewportHeight * 1.2;
           
           if (isFarAbove || isFarBelow) {
             setIsVisible(false);
@@ -34,7 +34,7 @@ export const useScrollAnimation = (threshold = 0.3) => {
       },
       { 
         threshold,
-        rootMargin: '0px 0px -10% 0px'
+        rootMargin: '0px 0px -5% 0px'
       }
     );
 
