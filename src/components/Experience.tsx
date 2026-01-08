@@ -39,6 +39,18 @@ const experiences = [
 const Experience = () => {
   const { ref, isVisible } = useScrollAnimation();
 
+  const getAnimationClass = (index: number) => {
+    // 1st (index 0) and 3rd (index 2) animate from left, 2nd (index 1) from right
+    if (index === 1) {
+      return isVisible 
+        ? 'opacity-100 translate-x-0' 
+        : 'opacity-0 translate-x-12';
+    }
+    return isVisible 
+      ? 'opacity-100 translate-x-0' 
+      : 'opacity-0 -translate-x-12';
+  };
+
   return (
     <section id="experience" className="w-full py-8 px-6 bg-secondary">
       <div className="container mx-auto">
@@ -49,15 +61,13 @@ const Experience = () => {
 
         <div
           ref={ref}
-          className={`max-w-3xl mx-auto space-y-4 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+          className="max-w-3xl mx-auto space-y-4"
         >
           {experiences.map((exp, index) => (
             <div
               key={index}
-              className="bg-card p-5 rounded-xl shadow-sm border border-border"
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className={`bg-card p-5 rounded-xl shadow-sm border border-border transition-all duration-500 ease-in-out ${getAnimationClass(index)}`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                 <div className="flex items-center gap-2">
