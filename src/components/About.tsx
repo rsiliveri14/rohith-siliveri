@@ -21,7 +21,7 @@ const About = () => {
         >
           {/* About Image */}
           <div className="lg:w-1/4">
-            <div className="w-60 h-90 md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl">
+            <div className="w-Auto h-Auto md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl">
               <img src={aboutImage} alt="Rohith Vardhan Siliveri" className="w-full h-full object-cover" />
             </div>
           </div>
