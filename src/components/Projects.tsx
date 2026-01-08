@@ -42,7 +42,7 @@ const Projects = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="projects" className="py-16 px-6 bg-secondary">
+    <section id="projects" className="w-full py-8 px-6 bg-secondary">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-8">
           <p className="section-title-small">Browse My</p>

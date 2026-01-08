@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import profileImage from "@/assets/profile.jpg";
 const Hero = () => {
   return (
-    <section className="min-h-[80vh] pt-16 pb-8 px-6 gap-[7px] flex items-center justify-start">
+    <section className="w-full py-8 px-6 flex items-center justify-center">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
           {/* Profile Image */}
