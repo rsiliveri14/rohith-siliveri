@@ -13,7 +13,7 @@ const About = () => {
           <h2 className="section-title">About Me</h2>
         </div>
 
-        <div ref={ref} className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div ref={ref} className={`flex flex-col items-center gap-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* About Image */}
           <div className="flex-shrink-0">
             <div className="w-72 md:w-80 lg:w-96 rounded-2xl overflow-hidden shadow-xl">
@@ -28,7 +28,7 @@ const About = () => {
           </div>
 
           {/* About Content */}
-          <div className="lg:w-3/4">
+          <div className="w-full max-w-2xl">
             {/* Info Cards */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="info-card py-4">
