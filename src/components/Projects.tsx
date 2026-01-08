@@ -55,7 +55,13 @@ const Projects = () => {
   return (
     <section id="projects" className="w-full py-8 px-6 bg-secondary">
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-8">
+        {/* Animated section header */}
+        <div 
+          ref={ref}
+          className={`text-center mb-8 transition-all duration-500 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
           <p className="section-title-small">Browse My</p>
           <h2 className="section-title">Projects</h2>
           <p className="text-muted-foreground text-sm max-w-2xl mx-auto mt-3">
@@ -64,7 +70,6 @@ const Projects = () => {
         </div>
 
         <div
-          ref={ref}
           className={`grid grid-cols-1 md:grid-cols-2 gap-4 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
@@ -72,11 +77,17 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 ease-out cursor-pointer flex flex-col"
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className={`group bg-background rounded-xl p-5 border border-border 
+                hover:border-foreground/30 hover:shadow-xl hover:-translate-y-2 
+                transition-all duration-300 ease-out cursor-pointer flex flex-col ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+              style={{ transitionDelay: `${150 + index * 100}ms` }}
             >
               <div className="flex-1">
-                <h3 className="font-semibold text-foreground text-base mb-1.5">{project.title}</h3>
+                <h3 className="font-semibold text-foreground text-base mb-1.5 group-hover:text-foreground transition-colors duration-300">
+                  {project.title}
+                </h3>
                 <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
                 
                 <ul className="text-muted-foreground text-xs space-y-1 mb-3">
@@ -92,7 +103,7 @@ const Projects = () => {
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
+                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full transition-colors duration-200 group-hover:bg-foreground/10"
                     >
                       {tag}
                     </span>
@@ -103,13 +114,13 @@ const Projects = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full flex items-center gap-2 text-xs w-fit"
+                className="rounded-full flex items-center gap-2 text-xs w-fit hover:scale-105 hover:shadow-md hover:border-foreground/50 transition-all duration-300"
                 asChild
               >
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
                   <Github size={14} />
                   GitHub
-                  <ExternalLink size={12} />
+                  <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
               </Button>
             </div>

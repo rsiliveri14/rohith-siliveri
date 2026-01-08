@@ -116,7 +116,13 @@ const Skills = () => {
   return (
     <section id="skills" className="w-full py-8 px-6 bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        <div className="text-center mb-8">
+        {/* Animated section header */}
+        <div 
+          ref={ref}
+          className={`text-center mb-8 transition-all duration-500 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
           <p className="section-title-small">What I Work With</p>
           <h2 className="section-title">Technical Arsenal</h2>
           <p className="text-muted-foreground text-sm mt-2 max-w-2xl mx-auto">
@@ -125,7 +131,6 @@ const Skills = () => {
         </div>
 
         <div
-          ref={ref}
           className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
@@ -135,11 +140,15 @@ const Skills = () => {
             return (
               <div
                 key={catIndex}
-                className="group bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 ease-out cursor-pointer"
-                style={{ transitionDelay: `${catIndex * 50}ms` }}
+                className={`group bg-card border border-border rounded-xl p-4 
+                  hover:border-foreground/30 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 
+                  transition-all duration-300 ease-out cursor-pointer ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                }`}
+                style={{ transitionDelay: `${150 + catIndex * 75}ms` }}
               >
                 <div className="flex items-center gap-2.5 mb-3">
-                  <div className="p-1.5 rounded-lg bg-primary/10 text-primary">
+                  <div className="p-1.5 rounded-lg bg-foreground/10 text-foreground group-hover:bg-foreground/20 transition-colors duration-300">
                     <IconComponent className="w-4 h-4" />
                   </div>
                   <h3 className="font-semibold text-foreground text-sm">{category.title}</h3>
@@ -150,7 +159,9 @@ const Skills = () => {
                     return (
                       <span
                         key={skillIndex}
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-muted-foreground text-xs rounded-full border border-border/50 hover:border-primary/40 hover:text-foreground transition-colors duration-200"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-muted-foreground text-xs rounded-full border border-border/50 
+                          hover:border-foreground/40 hover:text-foreground hover:bg-foreground/5 hover:scale-105
+                          transition-all duration-200"
                       >
                         <SkillIcon className="w-3 h-3" />
                         {skill.name}
