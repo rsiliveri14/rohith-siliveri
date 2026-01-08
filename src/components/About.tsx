@@ -26,6 +26,8 @@ const About = () => {
                 src={aboutImage}
                 alt="Rohith Vardhan Siliveri"
                 className="w-full h-full object-cover"
+                style={{ imageRendering: 'auto' }}
+                loading="eager"
               />
             </div>
           </div>
