@@ -1,38 +1,39 @@
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import fraudImage from '@/assets/fraud-detection.jpg';
-import mlopsImage from '@/assets/mlops.jpg';
-import nlpImage from '@/assets/nlp.jpg';
-import cvImage from '@/assets/computer-vision.jpg';
 
 const projects = [
   {
-    title: 'Fraud Detection System',
-    description: 'Real-time fraud detection with tree-based models and behavioral features.',
-    image: fraudImage,
-    tags: ['XGBoost', 'FastAPI', 'Docker'],
+    title: 'Social Media Data Analysis',
+    description: 'Exploratory data analysis project focused on understanding patterns and engagement in social media datasets.',
+    details: [
+      'Performed data cleaning and preprocessing on real-world social media data',
+      'Analyzed user engagement and content trends',
+      'Created visualizations to communicate insights clearly',
+    ],
+    tags: ['Python', 'Pandas', 'Data Analysis', 'Visualization'],
     github: 'https://github.com/rsiliveri14',
   },
   {
-    title: 'MLOps Pipeline',
-    description: 'Automated training, validation, and CI/CD for production ML.',
-    image: mlopsImage,
-    tags: ['MLflow', 'Kubernetes', 'Azure'],
+    title: 'Cyberbullying Detection',
+    description: 'A machine learning and NLP project to classify cyberbullying content in social media text.',
+    details: [
+      'Implemented text preprocessing and feature extraction',
+      'Trained and evaluated ML-based classifiers',
+      'Focused on accuracy, precision, recall, and F1-score',
+    ],
+    tags: ['Python', 'NLP', 'scikit-learn'],
     github: 'https://github.com/rsiliveri14',
   },
   {
-    title: 'NLP Applications',
-    description: 'Transformer-based classification and LLM integrations.',
-    image: nlpImage,
-    tags: ['PyTorch', 'BERT', 'Transformers'],
-    github: 'https://github.com/rsiliveri14',
-  },
-  {
-    title: 'Computer Vision',
-    description: 'Image-based solutions for damage assessment in insurance.',
-    image: cvImage,
-    tags: ['OpenCV', 'ResNet', 'SageMaker'],
+    title: 'House Price Prediction',
+    description: 'An end-to-end regression project predicting housing prices using structured datasets.',
+    details: [
+      'Conducted exploratory data analysis and feature engineering',
+      'Built and evaluated regression and tree-based models',
+      'Visualized model performance and key insights',
+    ],
+    tags: ['Python', 'Pandas', 'scikit-learn', 'Matplotlib'],
     github: 'https://github.com/rsiliveri14',
   },
 ];
@@ -42,53 +43,63 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-16 px-6 bg-secondary">
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
+      <div className="container mx-auto max-w-4xl">
+        <div className="text-center mb-8">
           <p className="section-title-small">Browse My</p>
           <h2 className="section-title">Projects</h2>
+          <p className="text-muted-foreground text-sm max-w-2xl mx-auto mt-3">
+            A curated selection of data analysis and machine learning projects demonstrating end-to-end problem solving, from data preparation and modeling to evaluation and insights.
+          </p>
         </div>
 
         <div
           ref={ref}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto transition-all duration-700 ${
+          className={`space-y-4 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {projects.map((project, index) => (
             <div
               key={index}
-              className="project-card"
+              className="bg-background rounded-xl p-5 border border-border hover:border-foreground/20 transition-all duration-300"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="font-bold text-foreground mb-1">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {project.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                <div className="flex-1">
+                  <h3 className="font-semibold text-foreground text-base mb-1.5">{project.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
+                  
+                  <ul className="text-muted-foreground text-xs space-y-1 mb-3">
+                    {project.details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-foreground mt-1">•</span>
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-full flex items-center gap-2 text-xs"
+                  className="rounded-full flex items-center gap-2 text-xs shrink-0 self-start"
                   asChild
                 >
                   <a href={project.github} target="_blank" rel="noopener noreferrer">
                     <Github size={14} />
-                    View Code
+                    GitHub
+                    <ExternalLink size={12} />
                   </a>
                 </Button>
               </div>
