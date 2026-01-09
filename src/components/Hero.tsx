@@ -167,10 +167,10 @@ const Hero = () => {
               </MagneticButton>
             </motion.div>
 
-            {/* Social Links with staggered animation */}
+            {/* Social Links with staggered animation - bordered style */}
             <motion.div 
               variants={itemVariants}
-              className="flex items-center justify-center gap-3 -ml-[26px]"
+              className="flex items-center justify-center gap-4 -ml-[26px]"
             >
               {[
                 { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "LinkedIn" },
@@ -182,15 +182,15 @@ const Hero = () => {
                     href={social.href}
                     target={social.href.startsWith('http') ? "_blank" : undefined}
                     rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                    className="p-2 rounded-full border border-border hover:bg-secondary hover:border-foreground/50 transition-all duration-300"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-foreground/30 bg-background hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300 shadow-sm hover:shadow-md"
                     aria-label={social.label}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
-                    whileHover={{ scale: 1.15, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <social.icon size={18} />
+                    <social.icon size={18} strokeWidth={2} />
                   </motion.a>
                 </MagneticButton>
               ))}

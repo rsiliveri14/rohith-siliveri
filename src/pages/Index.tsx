@@ -16,22 +16,22 @@ const Index = () => {
       <ParallaxBackground />
       <Navbar />
       <main className="relative z-10">
-        <section className="min-h-screen flex items-center">
+        <section id="hero" className="min-h-screen flex items-center">
           <Hero />
         </section>
-        <section className="min-h-screen flex items-center bg-background">
+        <section id="about" className="min-h-screen flex items-center bg-background">
           <About />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section id="experience" className="min-h-screen flex items-center">
           <Experience />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section id="skills" className="min-h-screen flex items-center">
           <Skills />
         </section>
-        <section className="min-h-screen flex items-center">
+        <section id="projects" className="min-h-screen flex items-center">
           <Projects />
         </section>
-        <section className="min-h-screen flex flex-col">
+        <section id="contact" className="min-h-screen flex flex-col">
           <div className="flex-1 flex items-center">
             <Contact />
           </div>
