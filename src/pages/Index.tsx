@@ -6,13 +6,11 @@ import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import ScrollProgress from '@/components/ScrollProgress';
 import ParallaxBackground from '@/components/ParallaxBackground';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background transition-colors duration-300 relative">
-      <ScrollProgress />
       <ParallaxBackground />
       <Navbar />
       <main className="relative z-10">
