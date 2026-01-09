@@ -33,6 +33,7 @@ const experiences = [
     highlights: [
       'Fraud detection and risk analytics',
       'Customer segmentation and A/B testing',
+      'Built predictive models for transaction scoring',
     ],
   },
 ];
