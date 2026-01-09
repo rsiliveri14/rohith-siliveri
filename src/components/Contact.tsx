@@ -1,12 +1,14 @@
+import { motion, useInView } from 'framer-motion';
 import { Mail, Linkedin, Github, Send } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import MagneticButton from './MagneticButton';
 
 const Contact = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,130 +18,161 @@ const Contact = () => {
     window.location.href = `mailto:rohith.siliveri14@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.4, 0.25, 1],
+      },
+    },
+  };
+
+  const socialLinks = [
+    { href: "mailto:rohith.siliveri14@gmail.com", icon: Mail, label: "rohith.siliveri14@gmail.com" },
+    { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "linkedin.com/in/rohiths14" },
+    { href: "https://github.com/rsiliveri14", icon: Github, label: "github.com/rsiliveri14" },
+  ];
+
   return (
-    <section id="contact" className="w-full py-8 px-6 bg-secondary">
+    <section id="contact" ref={containerRef} className="w-full py-8 px-6 bg-secondary">
       <div className="container mx-auto max-w-4xl">
         {/* Animated section header */}
-        <div 
-          ref={ref}
-          className={`text-center mb-10 transition-all duration-500 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          className="text-center mb-10"
         >
-          <p className="section-title-small">Get in Touch</p>
-          <h2 className="section-title">Contact Me</h2>
-        </div>
+          <motion.p 
+            className="section-title-small"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Get in Touch
+          </motion.p>
+          <motion.h2 
+            className="section-title"
+            initial={{ clipPath: 'inset(0 100% 0 0)' }}
+            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          >
+            Contact Me
+          </motion.h2>
+        </motion.div>
 
-        <div
-          className={`grid md:grid-cols-2 gap-8 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ transitionDelay: '150ms' }}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid md:grid-cols-2 gap-8"
         >
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div 
-              className={`transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '200ms' }}
-            >
-              <Input
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="transition-all duration-300 focus:scale-[1.01]"
-                required
-              />
-            </div>
-            <div 
-              className={`transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <Input
-                type="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="transition-all duration-300 focus:scale-[1.01]"
-                required
-              />
-            </div>
-            <div 
-              className={`transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '400ms' }}
+          <motion.form 
+            onSubmit={handleSubmit} 
+            className="space-y-4"
+            variants={itemVariants}
+          >
+            {[
+              { placeholder: "Your Name", key: "name", type: "text" },
+              { placeholder: "Your Email", key: "email", type: "email" },
+            ].map((field, index) => (
+              <motion.div
+                key={field.key}
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+              >
+                <Input
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={formData[field.key as keyof typeof formData]}
+                  onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
+                  className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
+                  required
+                />
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
             >
               <Textarea
                 placeholder="Your Message"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={4}
-                className="transition-all duration-300 focus:scale-[1.01]"
+                className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg"
                 required
               />
-            </div>
-            <div 
-              className={`transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '500ms' }}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <Button 
-                type="submit" 
-                className="w-full hover:scale-[1.02] hover:shadow-lg transition-all duration-300"
-              >
-                <Send size={16} className="mr-2" />
-                Send Message
-              </Button>
-            </div>
-          </form>
+              <MagneticButton strength={0.2}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Button 
+                    type="submit" 
+                    className="w-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <Send size={16} className="mr-2" />
+                    Send Message
+                  </Button>
+                </motion.div>
+              </MagneticButton>
+            </motion.div>
+          </motion.form>
 
-          <div className="space-y-3">
-            <a
-              href="mailto:rohith.siliveri14@gmail.com"
-              className={`flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
-                hover:shadow-lg hover:border-foreground/30 hover:-translate-y-1 hover:scale-[1.02]
-                transition-all duration-300 cursor-pointer ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-              }`}
-              style={{ transitionDelay: '250ms' }}
-            >
-              <Mail className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-              <span className="text-sm">rohith.siliveri14@gmail.com</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/rohiths14"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
-                hover:shadow-lg hover:border-foreground/30 hover:-translate-y-1 hover:scale-[1.02]
-                transition-all duration-300 cursor-pointer ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-              }`}
-              style={{ transitionDelay: '350ms' }}
-            >
-              <Linkedin className="w-5 h-5" />
-              <span className="text-sm">linkedin.com/in/rohiths14</span>
-            </a>
-            <a
-              href="https://github.com/rsiliveri14"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
-                hover:shadow-lg hover:border-foreground/30 hover:-translate-y-1 hover:scale-[1.02]
-                transition-all duration-300 cursor-pointer ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-              }`}
-              style={{ transitionDelay: '450ms' }}
-            >
-              <Github className="w-5 h-5" />
-              <span className="text-sm">github.com/rsiliveri14</span>
-            </a>
-          </div>
-        </div>
+          <motion.div 
+            variants={itemVariants}
+            className="space-y-3"
+          >
+            {socialLinks.map((link, index) => (
+              <MagneticButton key={link.label} strength={0.15}>
+                <motion.a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? "_blank" : undefined}
+                  rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
+                    hover:shadow-lg hover:border-foreground/30
+                    transition-all duration-300 cursor-pointer group"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                  whileHover={{ scale: 1.02, y: -3 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <motion.div
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <link.icon className="w-5 h-5" />
+                  </motion.div>
+                  <span className="text-sm">{link.label}</span>
+                </motion.a>
+              </MagneticButton>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
