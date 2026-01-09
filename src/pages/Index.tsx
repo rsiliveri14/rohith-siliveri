@@ -30,10 +30,8 @@ const Index = () => {
         <section id="projects" className="py-16 flex items-center">
           <Projects />
         </section>
-        <section id="contact" className="py-20 flex flex-col">
-          <div className="flex-1 flex items-center">
-            <Contact />
-          </div>
+        <section id="contact" className="pt-20 pb-8">
+          <Contact />
           <Footer />
         </section>
       </main>
