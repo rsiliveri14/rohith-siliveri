@@ -78,7 +78,7 @@ const Experience = () => {
   });
 
   return (
-    <section id="experience" ref={containerRef} className="w-full py-8 px-6 bg-secondary relative overflow-hidden">
+    <section id="experience" ref={containerRef} className="w-full py-8 px-6 bg-foreground text-background relative overflow-hidden">
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
@@ -88,7 +88,7 @@ const Experience = () => {
           className="text-center mb-10"
         >
           <motion.p 
-            className="section-title-small"
+            className="text-background/70 text-sm uppercase tracking-wider mb-2"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.5 }}
@@ -96,7 +96,7 @@ const Experience = () => {
             My Journey
           </motion.p>
           <motion.h2 
-            className="section-title"
+            className="text-3xl md:text-4xl font-bold text-background"
             initial={{ clipPath: 'inset(0 100% 0 0)' }}
             animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
             transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
@@ -107,9 +107,9 @@ const Experience = () => {
 
         <div className="max-w-3xl mx-auto relative">
           {/* Animated timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border transform -translate-x-1/2 hidden md:block">
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-background/20 transform -translate-x-1/2 hidden md:block">
             <motion.div
-              className="w-full bg-foreground/30"
+              className="w-full bg-background/50"
               style={{ height: lineHeight }}
             />
           </div>
@@ -130,7 +130,7 @@ const Experience = () => {
               >
                 {/* Timeline dot */}
                 <motion.div
-                  className="hidden md:block absolute top-6 w-3 h-3 rounded-full bg-foreground border-2 border-background z-10"
+                  className="hidden md:block absolute top-6 w-3 h-3 rounded-full bg-background border-2 border-foreground z-10"
                   style={{
                     [index % 2 === 0 ? 'right' : 'left']: '-26px',
                   }}
@@ -140,11 +140,10 @@ const Experience = () => {
                 />
 
                 <motion.div
-                  className="bg-card p-5 rounded-xl shadow-sm border border-border group cursor-default"
+                  className="bg-background p-5 rounded-xl shadow-sm border border-background/20 group cursor-default"
                   whileHover={{ 
                     scale: 1.02, 
-                    boxShadow: '0 20px 40px -15px rgba(0,0,0,0.1)',
-                    borderColor: 'hsl(var(--foreground) / 0.2)'
+                    boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)',
                   }}
                   transition={{ duration: 0.3 }}
                 >
@@ -178,12 +177,7 @@ const Experience = () => {
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                         transition={{ delay: 0.6 + index * 0.2 + i * 0.1, duration: 0.4 }}
                       >
-                        <motion.span 
-                          className="text-foreground mt-1"
-                          whileHover={{ scale: 1.5 }}
-                        >
-                          •
-                        </motion.span>
+                        <span className="text-foreground mt-1">•</span>
                         <span>{highlight}</span>
                       </motion.li>
                     ))}
