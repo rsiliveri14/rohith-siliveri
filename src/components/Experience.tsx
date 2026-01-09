@@ -40,21 +40,21 @@ const experiences = [
 
 const Experience = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
+  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0.2, 0.8], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.2,
         delayChildren: 0.1,
       },
     },
@@ -63,13 +63,15 @@ const Experience = () => {
   const cardVariants = (index: number) => ({
     hidden: { 
       opacity: 0, 
-      x: index % 2 === 0 ? -40 : 40,
+      x: index % 2 === 0 ? -80 : 80,
+      scale: 0.9,
     },
     visible: {
       opacity: 1,
       x: 0,
+      scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         ease: [0.25, 0.4, 0.25, 1],
       },
     },
@@ -80,24 +82,24 @@ const Experience = () => {
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
           className="text-center mb-10"
         >
           <motion.p 
             className="section-title-small"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
           >
             My Journey
           </motion.p>
           <motion.h2 
             className="section-title"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            initial={{ clipPath: 'inset(0 100% 0 0)' }}
+            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
           >
             Experience
           </motion.h2>

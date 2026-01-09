@@ -137,52 +137,40 @@ const Hero = () => {
               </motion.h2>
             </motion.div>
 
-            {/* CTA Buttons with magnetic effect - stronger visual hierarchy */}
+            {/* CTA Buttons with magnetic effect */}
             <motion.div 
               variants={itemVariants}
-              className="flex flex-wrap items-center justify-center md:justify-start mb-6 gap-4"
+              className="flex flex-wrap items-center justify-center md:justify-start mb-6 gap-[40px]"
             >
               <MagneticButton strength={0.3}>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button
-                    size="lg"
-                    className="rounded-full px-8 py-6 bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 shadow-lg hover:shadow-2xl font-semibold text-base"
-                    asChild
-                  >
-                    <a href="#contact">Hire Me</a>
-                  </Button>
-                </motion.div>
-              </MagneticButton>
-              <MagneticButton strength={0.3}>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
                     variant="outline"
-                    size="lg"
-                    className="rounded-full px-8 py-6 border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-300 shadow-md hover:shadow-xl font-semibold text-base"
-                    asChild
-                  >
-                    <a href="/resume.pdf" download>Download Resume</a>
-                  </Button>
-                </motion.div>
-              </MagneticButton>
-              <MagneticButton strength={0.3}>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="ghost"
-                    size="lg"
-                    className="rounded-full px-6 py-6 text-foreground hover:bg-foreground/10 transition-all duration-300 font-medium text-base"
+                    size="sm"
+                    className="rounded-full px-5 border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-300 shadow-lg hover:shadow-xl"
                     asChild
                   >
                     <a href="#projects">View Projects</a>
                   </Button>
                 </motion.div>
               </MagneticButton>
+              <MagneticButton strength={0.3}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    size="sm"
+                    className="rounded-full px-5 bg-foreground text-background hover:bg-foreground/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    asChild
+                  >
+                    <a href="#contact">Contact Me</a>
+                  </Button>
+                </motion.div>
+              </MagneticButton>
             </motion.div>
 
-            {/* Social Links with bordered style - improved visibility */}
+            {/* Social Links with staggered animation - bordered style */}
             <motion.div 
               variants={itemVariants}
-              className="flex items-center justify-center md:justify-start gap-3"
+              className="flex items-center justify-center gap-4 -ml-[26px]"
             >
               {[
                 { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "LinkedIn" },
@@ -194,15 +182,15 @@ const Hero = () => {
                     href={social.href}
                     target={social.href.startsWith('http') ? "_blank" : undefined}
                     rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                    className="w-11 h-11 flex items-center justify-center rounded-full border-2 border-foreground/40 bg-background hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300 shadow-md hover:shadow-lg"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-foreground/30 bg-background hover:bg-foreground hover:text-background hover:border-foreground transition-all duration-300 shadow-sm hover:shadow-md"
                     aria-label={social.label}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + index * 0.1, duration: 0.5 }}
-                    whileHover={{ scale: 1.15 }}
+                    whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <social.icon size={20} strokeWidth={2} />
+                    <social.icon size={18} strokeWidth={2} />
                   </motion.a>
                 </MagneticButton>
               ))}
