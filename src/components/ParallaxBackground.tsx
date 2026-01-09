@@ -3,54 +3,41 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const ParallaxBackground = () => {
   const { scrollY } = useScroll();
   
-  const y1 = useTransform(scrollY, [0, 3000], [0, -300]);
-  const y2 = useTransform(scrollY, [0, 3000], [0, -150]);
-  const y3 = useTransform(scrollY, [0, 3000], [0, -450]);
-  const rotate1 = useTransform(scrollY, [0, 3000], [0, 45]);
-  const rotate2 = useTransform(scrollY, [0, 3000], [0, -30]);
+  const y1 = useTransform(scrollY, [0, 3000], [0, -200]);
+  const y2 = useTransform(scrollY, [0, 3000], [0, -100]);
+  const opacity1 = useTransform(scrollY, [0, 1500], [0.03, 0.015]);
+  const opacity2 = useTransform(scrollY, [0, 1500], [0.02, 0.01]);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Gradient orbs with parallax */}
+      {/* Soft gradient orbs - no intersecting lines */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-[0.03] dark:opacity-[0.05]"
+        className="absolute w-[800px] h-[800px] rounded-full blur-3xl"
         style={{
           y: y1,
-          rotate: rotate1,
-          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 70%)',
-          top: '10%',
-          left: '-10%',
+          opacity: opacity1,
+          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 60%)',
+          top: '5%',
+          left: '-15%',
         }}
       />
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.02] dark:opacity-[0.04]"
+        className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
         style={{
           y: y2,
-          rotate: rotate2,
-          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 70%)',
-          top: '40%',
-          right: '-5%',
+          opacity: opacity2,
+          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 60%)',
+          top: '50%',
+          right: '-10%',
         }}
       />
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.02] dark:opacity-[0.03]"
+        className="absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-[0.015] dark:opacity-[0.02]"
         style={{
-          y: y3,
-          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 70%)',
-          bottom: '10%',
-          left: '30%',
-        }}
-      />
-
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          y: y1,
+          background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 60%)',
+          bottom: '20%',
+          left: '40%',
         }}
       />
     </div>
