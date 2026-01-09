@@ -78,7 +78,7 @@ const Experience = () => {
   });
 
   return (
-    <section id="experience" ref={containerRef} className="w-full py-8 px-6 relative overflow-hidden" style={{ backgroundColor: '#f5f5f5' }}>
+    <section id="experience" ref={containerRef} className="w-full py-8 px-6 relative overflow-hidden bg-background">
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
