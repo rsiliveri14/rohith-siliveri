@@ -7,6 +7,7 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ParallaxBackground from '@/components/ParallaxBackground';
+import BackToTop from '@/components/BackToTop';
 
 const Index = () => {
   return (
@@ -26,7 +27,7 @@ const Index = () => {
         <section id="skills" className="py-20 flex items-center">
           <Skills />
         </section>
-        <section id="projects" className="py-20 flex items-center">
+        <section id="projects" className="py-16 flex items-center">
           <Projects />
         </section>
         <section id="contact" className="py-20 flex flex-col">
@@ -36,6 +37,7 @@ const Index = () => {
           <Footer />
         </section>
       </main>
+      <BackToTop />
     </div>
   );
 };

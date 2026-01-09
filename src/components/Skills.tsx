@@ -32,11 +32,13 @@ import type { LucideIcon } from 'lucide-react';
 interface Skill {
   name: string;
   icon: LucideIcon;
+  iconColor: string;
 }
 
 interface SkillCategory {
   title: string;
   icon: LucideIcon;
+  iconColor: string;
   skills: Skill[];
 }
 
@@ -44,69 +46,76 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Machine Learning & AI',
     icon: Brain,
+    iconColor: 'text-purple-500',
     skills: [
-      { name: 'Machine Learning', icon: Cpu },
-      { name: 'Applied AI', icon: Brain },
-      { name: 'NLP & LLMs', icon: MessageSquare },
-      { name: 'Computer Vision', icon: Eye },
-      { name: 'Time-Series', icon: TrendingUp },
+      { name: 'Machine Learning', icon: Cpu, iconColor: 'text-blue-500' },
+      { name: 'Applied AI', icon: Brain, iconColor: 'text-purple-500' },
+      { name: 'NLP & LLMs', icon: MessageSquare, iconColor: 'text-green-500' },
+      { name: 'Computer Vision', icon: Eye, iconColor: 'text-cyan-500' },
+      { name: 'Time-Series', icon: TrendingUp, iconColor: 'text-orange-500' },
     ],
   },
   {
     title: 'Languages & Frameworks',
     icon: Code,
+    iconColor: 'text-blue-500',
     skills: [
-      { name: 'Python', icon: FileCode },
-      { name: 'SQL', icon: Database },
-      { name: 'PyTorch', icon: Boxes },
-      { name: 'scikit-learn', icon: Settings },
-      { name: 'XGBoost', icon: Rocket },
+      { name: 'Python', icon: FileCode, iconColor: 'text-yellow-500' },
+      { name: 'SQL', icon: Database, iconColor: 'text-blue-400' },
+      { name: 'PyTorch', icon: Boxes, iconColor: 'text-orange-500' },
+      { name: 'scikit-learn', icon: Settings, iconColor: 'text-cyan-500' },
+      { name: 'XGBoost', icon: Rocket, iconColor: 'text-red-500' },
     ],
   },
   {
     title: 'MLOps & Engineering',
     icon: Settings,
+    iconColor: 'text-gray-500',
     skills: [
-      { name: 'CI/CD Pipelines', icon: GitBranch },
-      { name: 'Model Monitoring', icon: Activity },
-      { name: 'MLflow', icon: Layers },
-      { name: 'Feast', icon: Database },
+      { name: 'CI/CD Pipelines', icon: GitBranch, iconColor: 'text-green-500' },
+      { name: 'Model Monitoring', icon: Activity, iconColor: 'text-pink-500' },
+      { name: 'MLflow', icon: Layers, iconColor: 'text-blue-500' },
+      { name: 'Feast', icon: Database, iconColor: 'text-purple-500' },
     ],
   },
   {
     title: 'Deployment & Services',
     icon: Server,
+    iconColor: 'text-indigo-500',
     skills: [
-      { name: 'Docker', icon: Container },
-      { name: 'Kubernetes', icon: Boxes },
-      { name: 'FastAPI', icon: Zap },
-      { name: 'Microservices', icon: Workflow },
+      { name: 'Docker', icon: Container, iconColor: 'text-blue-400' },
+      { name: 'Kubernetes', icon: Boxes, iconColor: 'text-blue-600' },
+      { name: 'FastAPI', icon: Zap, iconColor: 'text-teal-500' },
+      { name: 'Microservices', icon: Workflow, iconColor: 'text-violet-500' },
     ],
   },
   {
     title: 'Cloud Platforms',
     icon: Cloud,
+    iconColor: 'text-sky-500',
     skills: [
-      { name: 'Azure ML', icon: Cloud },
-      { name: 'AWS SageMaker', icon: Globe },
+      { name: 'Azure ML', icon: Cloud, iconColor: 'text-blue-500' },
+      { name: 'AWS SageMaker', icon: Globe, iconColor: 'text-orange-500' },
     ],
   },
   {
     title: 'Big Data & Streaming',
     icon: Database,
+    iconColor: 'text-emerald-500',
     skills: [
-      { name: 'Apache Spark', icon: Zap },
-      { name: 'Kafka', icon: Activity },
+      { name: 'Apache Spark', icon: Zap, iconColor: 'text-orange-500' },
+      { name: 'Kafka', icon: Activity, iconColor: 'text-red-500' },
     ],
   },
   {
     title: 'Domains & Specialties',
     icon: Target,
+    iconColor: 'text-rose-500',
     skills: [
-      { name: 'Fraud Detection', icon: AlertTriangle },
-      { name: 'Risk Modeling', icon: Scale },
-      { name: 'Explainable AI', icon: BookOpen },
-      { name: 'Model Governance', icon: Shield },
+      { name: 'Fraud Detection', icon: AlertTriangle, iconColor: 'text-yellow-500' },
+      { name: 'Risk Modeling', icon: Scale, iconColor: 'text-blue-500' },
+      { name: 'Explainable AI', icon: BookOpen, iconColor: 'text-green-500' },
+      { name: 'Model Governance', icon: Shield, iconColor: 'text-indigo-500' },
     ],
   },
 ];
@@ -211,7 +220,7 @@ const Skills = () => {
               >
                 <div className="flex items-center gap-2.5 mb-3">
                   <motion.div 
-                    className="p-1.5 rounded-lg bg-foreground/10 text-foreground group-hover:bg-foreground/20 transition-colors duration-300"
+                    className={`p-1.5 rounded-lg bg-foreground/10 ${category.iconColor} group-hover:bg-foreground/20 transition-colors duration-300`}
                     whileHover={{ rotate: 10, scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -237,7 +246,7 @@ const Skills = () => {
                         whileHover={{ scale: 1.08, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <SkillIcon className="w-3 h-3" />
+                        <SkillIcon className={`w-3 h-3 ${skill.iconColor}`} />
                         {skill.name}
                       </motion.span>
                     );
