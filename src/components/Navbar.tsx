@@ -6,6 +6,7 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
 
 const navLinks = [
+  { href: "#hero", label: "Home", id: "hero" },
   { href: "#about", label: "About", id: "about" },
   { href: "#experience", label: "Experience", id: "experience" },
   { href: "#skills", label: "Skills", id: "skills" },
