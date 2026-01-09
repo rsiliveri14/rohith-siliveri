@@ -152,8 +152,8 @@ const About = () => {
             {/* Education Details */}
             <div className="space-y-2">
               {[
-                { degree: "M.S. Computer Science (AI)", school: "SUNY Binghamton, NY", period: "2023 – 2025" },
-                { degree: "B.Tech Computer Science", school: "Anurag University, India", period: "2019 – 2023" },
+                { degree: "M.S. Computer Science (AI)", school: "SUNY Binghamton, NY" },
+                { degree: "B.Tech Computer Science", school: "Anurag University, India" },
               ].map((edu, index) => (
                 <motion.div 
                   key={edu.degree}
@@ -166,7 +166,6 @@ const About = () => {
                     <p className="font-medium text-sm">{edu.degree}</p>
                     <p className="text-xs text-muted-foreground">{edu.school}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1 sm:mt-0">{edu.period}</p>
                 </motion.div>
               ))}
             </div>
