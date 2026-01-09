@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <motion.footer 
       ref={footerRef}
-      className="py-8 px-6 border-t border-border"
+      className="py-6 px-6 border-t border-border bg-background"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.6 }}
@@ -38,7 +38,7 @@ const Footer = () => {
             © {currentYear} Rohith Vardhan Siliveri. All rights reserved.
           </motion.p>
           <motion.div 
-            className="flex items-center gap-8"
+            className="flex items-center gap-6"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={{
@@ -46,16 +46,16 @@ const Footer = () => {
               hidden: {},
             }}
           >
-            {links.map((link, index) => (
+            {links.map((link) => (
               <MagneticButton key={link.href} strength={0.2}>
                 <motion.a 
                   href={link.href} 
-                  className="text-muted-foreground hover:text-foreground text-sm transition-all duration-300 px-2 py-1"
+                  className="text-muted-foreground hover:text-foreground text-sm transition-all duration-300"
                   variants={{
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0 },
                   }}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
