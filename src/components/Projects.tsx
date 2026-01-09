@@ -127,7 +127,7 @@ const Projects = () => {
               transition={{ duration: 0.4 }}
             >
               {/* Project Image */}
-              <div className="relative h-40 overflow-hidden">
+              <div className="relative h-32 overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}

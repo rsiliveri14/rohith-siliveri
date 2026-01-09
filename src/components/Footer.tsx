@@ -38,7 +38,7 @@ const Footer = () => {
             © {currentYear} Rohith Vardhan Siliveri. All rights reserved.
           </motion.p>
           <motion.div 
-            className="flex items-center gap-6"
+            className="flex items-center gap-8"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={{
@@ -50,7 +50,7 @@ const Footer = () => {
               <MagneticButton key={link.href} strength={0.2}>
                 <motion.a 
                   href={link.href} 
-                  className="text-muted-foreground hover:text-foreground text-sm transition-all duration-300"
+                  className="text-muted-foreground hover:text-foreground text-sm transition-all duration-300 px-2 py-1"
                   variants={{
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0 },
