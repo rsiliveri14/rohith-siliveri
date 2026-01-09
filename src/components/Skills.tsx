@@ -90,19 +90,12 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Cloud Platforms',
+    title: 'Cloud & Big Data',
     icon: Cloud,
     iconColor: 'text-sky-500',
     skills: [
       { name: 'Azure ML', icon: Cloud, iconColor: 'text-blue-500' },
       { name: 'AWS SageMaker', icon: Globe, iconColor: 'text-orange-500' },
-    ],
-  },
-  {
-    title: 'Big Data & Streaming',
-    icon: Database,
-    iconColor: 'text-emerald-500',
-    skills: [
       { name: 'Apache Spark', icon: Zap, iconColor: 'text-orange-500' },
       { name: 'Kafka', icon: Activity, iconColor: 'text-red-500' },
     ],
