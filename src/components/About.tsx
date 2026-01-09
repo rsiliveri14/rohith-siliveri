@@ -5,47 +5,46 @@ import { useRef } from "react";
 
 const About = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
+  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
+        duration: 0.5,
         ease: [0.25, 0.4, 0.25, 1],
       },
     },
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, scale: 0.9, clipPath: 'inset(100% 0 0 0)' },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
       scale: 1,
-      clipPath: 'inset(0% 0 0 0)',
       transition: {
-        duration: 0.9,
+        duration: 0.6,
         ease: [0.25, 0.4, 0.25, 1],
       },
     },
@@ -56,24 +55,24 @@ const About = () => {
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
           className="text-center mb-10"
         >
           <motion.p 
             className="section-title-small"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             Get To Know More
           </motion.p>
           <motion.h2 
             className="section-title"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             About Me
           </motion.h2>

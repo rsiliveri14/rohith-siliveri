@@ -21,19 +21,19 @@ const Index = () => {
           <section id="hero" className="min-h-screen flex items-center">
             <Hero />
           </section>
-          <section id="about" className="py-20 flex items-center bg-background">
+          <section id="about" className="py-12 md:py-16">
             <About />
           </section>
-          <section id="experience" className="py-20 flex items-center">
+          <section id="experience" className="py-12 md:py-16">
             <Experience />
           </section>
-          <section id="skills" className="py-20 flex items-center">
+          <section id="skills" className="py-12 md:py-16">
             <Skills />
           </section>
-          <section id="projects" className="py-16 flex items-center">
+          <section id="projects" className="py-12 md:py-16">
             <Projects />
           </section>
-          <section id="contact" className="pt-20">
+          <section id="contact" className="pt-12 md:pt-16">
             <Contact />
           </section>
         </main>
