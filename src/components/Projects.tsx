@@ -47,27 +47,26 @@ const projects = [
 ];
 const Projects = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
+  const isInView = useInView(containerRef, { once: true, margin: "-10%" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
         delayChildren: 0.1,
       },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.7,
+        duration: 0.5,
         ease: [0.25, 0.4, 0.25, 1],
       },
     },
@@ -78,32 +77,32 @@ const Projects = () => {
       <div className="container mx-auto max-w-5xl">
         {/* Animated section header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
           className="text-center mb-8"
         >
           <motion.p 
             className="section-title-small"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             Browse My
           </motion.p>
           <motion.h2 
             className="section-title"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             Projects
           </motion.h2>
           <motion.p 
             className="text-muted-foreground text-sm max-w-2xl mx-auto mt-3"
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
           >
             A curated selection of data analysis and machine learning projects demonstrating end-to-end problem solving, from data preparation and modeling to evaluation and insights.
           </motion.p>
@@ -121,68 +120,63 @@ const Projects = () => {
               variants={cardVariants}
               className="group bg-background rounded-xl border border-border cursor-pointer flex flex-col relative overflow-hidden"
               whileHover={{ 
-                y: -8,
-                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)',
+                y: -5,
+                boxShadow: '0 20px 40px -12px rgba(0,0,0,0.12)',
               }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
-              {/* Project Image */}
-              <div className="relative h-32 overflow-hidden">
+              {/* Project Image - larger and more prominent */}
+              <div className="relative h-40 overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
+                  initial={{ scale: 1 }}
                   whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+                  transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
                 />
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Content */}
               <div className="p-5 flex-1 flex flex-col relative z-10">
                 <motion.h3 
-                  className="font-semibold text-foreground text-base mb-1.5 group-hover:text-primary transition-colors duration-300"
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="font-bold text-foreground text-base mb-1.5 group-hover:text-primary transition-colors duration-300"
                 >
                   {project.title}
                 </motion.h3>
-                <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
+                <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{project.description}</p>
                 
                 <ul className="text-muted-foreground text-xs space-y-1 mb-3">
-                  {project.details.map((detail, i) => (
-                    <motion.li 
+                  {project.details.slice(0, 2).map((detail, i) => (
+                    <li 
                       key={i} 
                       className="flex items-start gap-2"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                      transition={{ delay: 0.4 + index * 0.1 + i * 0.05 }}
                     >
                       <span className="text-foreground mt-1">•</span>
                       <span>{detail}</span>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
 
+                {/* Tech tags - more prominent */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.tags.map((tag, tagIndex) => (
-                    <motion.span
+                    <span
                       key={tagIndex}
-                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full transition-all duration-200 hover:bg-foreground/10 hover:scale-105"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                      transition={{ delay: 0.5 + index * 0.1 + tagIndex * 0.03 }}
+                      className="px-2 py-0.5 bg-secondary text-muted-foreground text-xs rounded-full border border-border/50 hover:border-foreground/30 hover:bg-foreground/5 transition-all duration-200"
                     >
                       {tag}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
 
                 <div className="mt-auto">
                   <MagneticButton strength={0.2}>
                     <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       <Button
                         variant="outline"
@@ -192,14 +186,8 @@ const Projects = () => {
                       >
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
                           <Github size={14} />
-                          GitHub
-                          <motion.span
-                            initial={{ opacity: 0, x: -5 }}
-                            whileHover={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <ExternalLink size={12} />
-                          </motion.span>
+                          View on GitHub
+                          <ExternalLink size={12} />
                         </a>
                       </Button>
                     </motion.div>
