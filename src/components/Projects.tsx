@@ -74,7 +74,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={containerRef} className="w-full py-8 px-6 bg-secondary">
+    <section id="projects" ref={containerRef} className="w-full py-8 px-6 bg-background">
       <div className="container mx-auto max-w-5xl">
         {/* Animated section header */}
         <motion.div

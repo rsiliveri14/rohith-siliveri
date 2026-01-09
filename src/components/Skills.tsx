@@ -155,7 +155,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" ref={containerRef} className="w-full py-8 px-6 bg-secondary/30">
+    <section id="skills" ref={containerRef} className="w-full py-8 px-6 bg-background">
       <div className="container mx-auto max-w-5xl">
         {/* Animated section header */}
         <motion.div
