@@ -3,6 +3,10 @@ import { Github, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 import MagneticButton from './MagneticButton';
+import socialMediaImg from '@/assets/nlp.jpg';
+import cyberbullyingImg from '@/assets/fraud-detection.jpg';
+import housePriceImg from '@/assets/mlops.jpg';
+import superBowlImg from '@/assets/computer-vision.jpg';
 
 const projects = [
   {
@@ -15,6 +19,7 @@ const projects = [
     ],
     tags: ['Python', 'Pandas', 'Data Analysis', 'Visualization'],
     github: 'https://github.com/rsiliveri14',
+    image: socialMediaImg,
   },
   {
     title: 'Cyberbullying Detection',
@@ -26,6 +31,7 @@ const projects = [
     ],
     tags: ['Python', 'NLP', 'scikit-learn'],
     github: 'https://github.com/rsiliveri14',
+    image: cyberbullyingImg,
   },
   {
     title: 'House Price Prediction',
@@ -37,6 +43,7 @@ const projects = [
     ],
     tags: ['Python', 'Pandas', 'scikit-learn', 'Matplotlib'],
     github: 'https://github.com/rsiliveri14',
+    image: housePriceImg,
   },
   {
     title: 'Super Bowl Ads Analysis',
@@ -48,6 +55,7 @@ const projects = [
     ],
     tags: ['Python', 'Pandas', 'Data Analysis', 'Visualization'],
     github: 'https://github.com/rsiliveri14',
+    image: superBowlImg,
   },
 ];
 
@@ -119,28 +127,35 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group bg-background rounded-xl p-5 border border-border cursor-pointer flex flex-col relative overflow-hidden"
+              className="group bg-background rounded-xl border border-border cursor-pointer flex flex-col relative overflow-hidden"
               whileHover={{ 
-                scale: 1.02, 
                 y: -8,
                 boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)',
               }}
               transition={{ duration: 0.4 }}
             >
-              {/* Animated gradient background on hover */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              />
+              {/* Project Image */}
+              <div className="relative h-44 overflow-hidden">
+                <motion.img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              </div>
 
-              <div className="flex-1 relative z-10">
+              {/* Content */}
+              <div className="p-5 flex-1 flex flex-col relative z-10">
                 <motion.h3 
-                  className="font-semibold text-foreground text-base mb-1.5"
+                  className="font-semibold text-foreground text-base mb-1.5 group-hover:text-primary transition-colors duration-300"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: 0.2 + index * 0.1 }}
@@ -158,12 +173,7 @@ const Projects = () => {
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                       transition={{ delay: 0.4 + index * 0.1 + i * 0.05 }}
                     >
-                      <motion.span 
-                        className="text-foreground mt-1"
-                        whileHover={{ scale: 1.5 }}
-                      >
-                        •
-                      </motion.span>
+                      <span className="text-foreground mt-1">•</span>
                       <span>{detail}</span>
                     </motion.li>
                   ))}
@@ -173,43 +183,44 @@ const Projects = () => {
                   {project.tags.map((tag, tagIndex) => (
                     <motion.span
                       key={tagIndex}
-                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full transition-all duration-200 group-hover:bg-foreground/10"
+                      className="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded-full transition-all duration-200 hover:bg-foreground/10 hover:scale-105"
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                       transition={{ delay: 0.5 + index * 0.1 + tagIndex * 0.03 }}
-                      whileHover={{ scale: 1.1, y: -2 }}
                     >
                       {tag}
                     </motion.span>
                   ))}
                 </div>
-              </div>
 
-              <MagneticButton strength={0.2}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-full flex items-center gap-2 text-xs w-fit hover:shadow-md hover:border-foreground/50 transition-all duration-300"
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github size={14} />
-                      GitHub
-                      <motion.span
-                        initial={{ opacity: 0, x: -5 }}
-                        whileHover={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2 }}
+                <div className="mt-auto">
+                  <MagneticButton strength={0.2}>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full flex items-center gap-2 text-xs w-fit hover:shadow-md hover:border-foreground/50 transition-all duration-300"
+                        asChild
                       >
-                        <ExternalLink size={12} />
-                      </motion.span>
-                    </a>
-                  </Button>
-                </motion.div>
-              </MagneticButton>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                          <Github size={14} />
+                          GitHub
+                          <motion.span
+                            initial={{ opacity: 0, x: -5 }}
+                            whileHover={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ExternalLink size={12} />
+                          </motion.span>
+                        </a>
+                      </Button>
+                    </motion.div>
+                  </MagneticButton>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
