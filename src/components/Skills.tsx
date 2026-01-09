@@ -1,4 +1,5 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { 
   Brain, 
   Code, 
@@ -111,68 +112,141 @@ const skillCategories: SkillCategory[] = [
 ];
 
 const Skills = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.4, 0.25, 1],
+      },
+    },
+  };
+
+  const skillTagVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: i * 0.05,
+        duration: 0.4,
+        ease: [0.25, 0.4, 0.25, 1],
+      },
+    }),
+  };
 
   return (
-    <section id="skills" className="w-full py-8 px-6 bg-secondary/30">
+    <section id="skills" ref={containerRef} className="w-full py-8 px-6 bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
         {/* Animated section header */}
-        <div 
-          ref={ref}
-          className={`text-center mb-8 transition-all duration-500 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+          className="text-center mb-8"
         >
-          <p className="section-title-small">What I Work With</p>
-          <h2 className="section-title">Technical Arsenal</h2>
-          <p className="text-muted-foreground text-sm mt-2 max-w-2xl mx-auto">
+          <motion.p 
+            className="section-title-small"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            What I Work With
+          </motion.p>
+          <motion.h2 
+            className="section-title"
+            initial={{ clipPath: 'inset(0 100% 0 0)' }}
+            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          >
+            Technical Arsenal
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground text-sm mt-2 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
             Technologies, tools, and frameworks I use to build reliable and production-ready machine learning systems.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {skillCategories.map((category, catIndex) => {
             const IconComponent = category.icon;
             return (
-              <div
+              <motion.div
                 key={catIndex}
-                className={`group bg-card border border-border rounded-xl p-4 
-                  hover:border-foreground/30 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 
-                  transition-all duration-300 ease-out cursor-pointer ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-                style={{ transitionDelay: `${150 + catIndex * 75}ms` }}
+                variants={cardVariants}
+                className="group bg-card border border-border rounded-xl p-4 cursor-pointer"
+                whileHover={{ 
+                  scale: 1.03, 
+                  y: -5,
+                  boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1)',
+                  borderColor: 'hsl(var(--foreground) / 0.3)'
+                }}
+                transition={{ duration: 0.3 }}
               >
                 <div className="flex items-center gap-2.5 mb-3">
-                  <div className="p-1.5 rounded-lg bg-foreground/10 text-foreground group-hover:bg-foreground/20 transition-colors duration-300">
+                  <motion.div 
+                    className="p-1.5 rounded-lg bg-foreground/10 text-foreground group-hover:bg-foreground/20 transition-colors duration-300"
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <IconComponent className="w-4 h-4" />
-                  </div>
+                  </motion.div>
                   <h3 className="font-semibold text-foreground text-sm">{category.title}</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <motion.div 
+                  className="flex flex-wrap gap-2"
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                >
                   {category.skills.map((skill, skillIndex) => {
                     const SkillIcon = skill.icon;
                     return (
-                      <span
+                      <motion.span
                         key={skillIndex}
+                        variants={skillTagVariants}
+                        custom={skillIndex}
                         className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-secondary text-muted-foreground text-xs rounded-full border border-border/50 
-                          hover:border-foreground/40 hover:text-foreground hover:bg-foreground/5 hover:scale-105
+                          hover:border-foreground/40 hover:text-foreground hover:bg-foreground/5
                           transition-all duration-200"
+                        whileHover={{ scale: 1.08, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <SkillIcon className="w-3 h-3" />
                         {skill.name}
-                      </span>
+                      </motion.span>
                     );
                   })}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
