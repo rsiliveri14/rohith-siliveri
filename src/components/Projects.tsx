@@ -5,8 +5,7 @@ import { useRef } from 'react';
 import MagneticButton from './MagneticButton';
 import socialMediaImg from '@/assets/nlp.jpg';
 import cyberbullyingImg from '@/assets/fraud-detection.jpg';
-import housePriceImg from '@/assets/mlops.jpg';
-import superBowlImg from '@/assets/computer-vision.jpg';
+import housePriceImg from '@/assets/house-price.jpg';
 
 const projects = [
   {
@@ -45,20 +44,7 @@ const projects = [
     github: 'https://github.com/rsiliveri14',
     image: housePriceImg,
   },
-  {
-    title: 'Super Bowl Ads Analysis',
-    description: 'A data analysis project focused on understanding trends and patterns in Super Bowl advertising campaigns.',
-    details: [
-      'Cleaned and explored structured datasets related to Super Bowl advertisements',
-      'Analyzed engagement, themes, and temporal trends across ads',
-      'Used visualizations to communicate insights and patterns clearly',
-    ],
-    tags: ['Python', 'Pandas', 'Data Analysis', 'Visualization'],
-    github: 'https://github.com/rsiliveri14',
-    image: superBowlImg,
-  },
 ];
-
 const Projects = () => {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: "-15%" });
@@ -127,7 +113,7 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -141,7 +127,7 @@ const Projects = () => {
               transition={{ duration: 0.4 }}
             >
               {/* Project Image */}
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative h-40 overflow-hidden">
                 <motion.img
                   src={project.image}
                   alt={project.title}
@@ -149,7 +135,6 @@ const Projects = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               </div>
 
               {/* Content */}
