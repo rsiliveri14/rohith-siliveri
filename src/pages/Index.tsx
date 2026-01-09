@@ -37,7 +37,6 @@ const Index = () => {
             <Contact />
           </section>
         </main>
-        <Footer />
         <BackToTop />
       </div>
     </>

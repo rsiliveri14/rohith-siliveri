@@ -10,6 +10,7 @@ const Contact = () => {
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { once: false, margin: "-15%" });
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const currentYear = new Date().getFullYear();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,6 +46,13 @@ const Contact = () => {
     { href: "mailto:rohith.siliveri14@gmail.com", icon: Mail, label: "rohith.siliveri14@gmail.com" },
     { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "linkedin.com/in/rohiths14" },
     { href: "https://github.com/rsiliveri14", icon: Github, label: "github.com/rsiliveri14" },
+  ];
+
+  const footerLinks = [
+    { href: "#about", label: "About" },
+    { href: "#experience", label: "Experience" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
@@ -172,6 +180,51 @@ const Contact = () => {
               </MagneticButton>
             ))}
           </motion.div>
+        </motion.div>
+
+        {/* Footer integrated into contact section */}
+        <motion.div 
+          className="mt-12 pt-6 border-t border-border"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <motion.p 
+              className="text-muted-foreground text-sm"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              © {currentYear} Rohith Vardhan Siliveri. All rights reserved.
+            </motion.p>
+            <motion.div 
+              className="flex items-center gap-6"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={{
+                visible: { transition: { staggerChildren: 0.05 } },
+                hidden: {},
+              }}
+            >
+              {footerLinks.map((link) => (
+                <MagneticButton key={link.href} strength={0.2}>
+                  <motion.a 
+                    href={link.href} 
+                    className="text-muted-foreground hover:text-foreground text-sm transition-all duration-300"
+                    variants={{
+                      hidden: { opacity: 0, y: 10 },
+                      visible: { opacity: 1, y: 0 },
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {link.label}
+                  </motion.a>
+                </MagneticButton>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
