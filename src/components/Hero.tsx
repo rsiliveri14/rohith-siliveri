@@ -82,7 +82,7 @@ const Hero = () => {
                 />
                 <motion.img
                   src={profileImage}
-                  alt="Rohith Vardhan Siliveri"
+                  alt="Rohith Siliveri"
                   className="w-full h-full object-cover"
                   style={{ imageRendering: "auto" }}
                   loading="eager"
