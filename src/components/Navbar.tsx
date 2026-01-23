@@ -57,7 +57,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Rohith Vardhan Siliveri
+              Rohith Siliveri
             </motion.a>
           </MagneticButton>
 
