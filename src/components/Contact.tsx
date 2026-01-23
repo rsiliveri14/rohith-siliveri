@@ -196,7 +196,7 @@ const Contact = () => {
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              © {currentYear} Rohith Vardhan Siliveri. All rights reserved.
+              © {currentYear} Rohith Siliveri. All rights reserved.
             </motion.p>
             <motion.div 
               className="flex items-center gap-6"
