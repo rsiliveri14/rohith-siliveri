@@ -39,6 +39,7 @@ const Footer = () => {
           </motion.p>
           <motion.div 
             className="flex items-center gap-6"
+            
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={{
