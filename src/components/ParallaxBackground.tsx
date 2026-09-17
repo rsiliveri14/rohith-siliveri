@@ -13,6 +13,8 @@ const ParallaxBackground = () => {
       {/* Soft gradient orbs - no intersecting lines */}
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full blur-3xl"
+        animate={{ x: [0, 30, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           y: y1,
           opacity: opacity1,
@@ -23,6 +25,8 @@ const ParallaxBackground = () => {
       />
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
+        animate={{ x: [0, -24, 0] }}
+        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           y: y2,
           opacity: opacity2,

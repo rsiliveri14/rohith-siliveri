@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Download } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
 
 const navLinks = [
-  { href: "#hero", label: "Home", id: "hero" },
-  { href: "#about", label: "About", id: "about" },
-  { href: "#experience", label: "Experience", id: "experience" },
-  { href: "#skills", label: "Skills", id: "skills" },
-  { href: "#projects", label: "Projects", id: "projects" },
-  { href: "#contact", label: "Contact", id: "contact" },
+  { href: "/#hero", label: "Home", id: "hero" },
+  { href: "/#about", label: "About", id: "about" },
+  { href: "/#experience", label: "Experience", id: "experience" },
+  { href: "/#work", label: "Work", id: "work" },
+  { href: "/#skills", label: "Skills", id: "skills" },
+  { href: "/#contact", label: "Contact", id: "contact" },
 ];
 
 const Navbar = () => {
@@ -30,7 +30,13 @@ const Navbar = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const target = document.querySelector(href);
+    const hash = href.includes('#') ? `#${href.split('#')[1]}` : href;
+    if (window.location.pathname !== '/') {
+      setIsOpen(false);
+      window.location.assign(href);
+      return;
+    }
+    const target = document.querySelector(hash);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
@@ -52,7 +58,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <MagneticButton strength={0.2}>
             <motion.a 
-              href="#" 
+              href="/" 
               className="text-lg font-bold text-foreground relative"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -103,9 +109,21 @@ const Navbar = () => {
               </MagneticButton>
             ))}
             <MagneticButton strength={0.2}>
+              <motion.a
+                href="/Rohith_Resume.docx"
+                download="Rohith_Resume.docx"
+                className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300 inline-flex"
+                aria-label="Download resume"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Download size={18} />
+              </motion.a>
+            </MagneticButton>
+            <MagneticButton strength={0.2}>
               <motion.button
                 onClick={toggleTheme}
-                className="p-2.5 ml-2 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
+                className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
                 aria-label="Toggle theme"
                 whileHover={{ scale: 1.1, rotate: 180 }}
                 whileTap={{ scale: 0.9 }}
@@ -128,6 +146,14 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
+            <motion.a
+              href="/Rohith_Resume.docx"
+              download="Rohith_Resume.docx"
+              className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
+              aria-label="Download resume"
+            >
+              <Download size={18} />
+            </motion.a>
             <motion.button
               onClick={toggleTheme}
               className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"

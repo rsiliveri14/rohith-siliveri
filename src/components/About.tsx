@@ -52,7 +52,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" ref={containerRef} className="w-full py-8 px-6">
+    <section id="about" ref={containerRef} className="w-full py-20 px-6">
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
@@ -117,7 +117,7 @@ const About = () => {
             {/* Info Cards with stagger */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               {[
-                { icon: Briefcase, title: "Experience", value: "3+ Years" },
+                { icon: Briefcase, title: "Experience", value: "4+ Years" },
                 { icon: GraduationCap, title: "Education", value: "M.S. Computer Science" },
               ].map((item, index) => (
                 <motion.div
@@ -140,14 +140,23 @@ const About = () => {
             </div>
 
             {/* Bio */}
-            <motion.p 
+            <motion.div
               variants={itemVariants}
-              className="text-muted-foreground text-sm leading-relaxed text-center lg:text-left mb-6"
+              className="text-muted-foreground text-sm leading-relaxed text-center lg:text-left mb-6 space-y-4"
             >
-              AI/ML Engineer with 3+ years of experience building and deploying machine learning systems in finance and
-              insurance. Experienced across the full ML lifecycle, with a strong focus on fraud detection, MLOps, and
-              reliable, scalable AI solutions.
-            </motion.p>
+              <p>
+                I’m an Applied AI Engineer working across production machine learning and AI evaluation. I build agentic
+                coding benchmarks and verification systems, and I apply the same discipline to production AI in banking and
+                insurance — where reliability, reproducibility, security, and auditability matter as much as model
+                performance.
+              </p>
+              <p>
+                In 2026, I worked across Handshake AI and Snorkel AI on SWE-bench, Terminal-Bench, Harbor, computer-use,
+                and GPU-based ML evaluation, spanning benchmark construction, evaluation infrastructure, model assessment,
+                and quality review. Earlier, I worked on applied AI systems across banking, insurance, and research,
+                including fraud detection, claims intelligence, document NLP, and predictive modeling.
+              </p>
+            </motion.div>
 
             {/* Education Details */}
             <div className="space-y-2">

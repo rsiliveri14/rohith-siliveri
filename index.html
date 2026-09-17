@@ -16,7 +16,7 @@
     <!-- SEO Meta -->
     <meta
       name="description"
-      content="Rohith Siliveri – AI/ML Engineer specializing in production machine learning systems, MLOps, fraud detection, and applied AI."
+      content="Rohith Siliveri – Applied AI Engineer focused on Generative AI, LLMs, agentic systems, AI evaluation, and production machine learning."
     />
     <meta name="author" content="Rohith Siliveri" />
 
@@ -25,7 +25,7 @@
     <meta property="og:title" content="Rohith Siliveri" />
     <meta
       property="og:description"
-      content="AI/ML Engineer focused on building production-ready machine learning systems, MLOps pipelines, and applied AI solutions."
+      content="Applied AI Engineer focused on Generative AI, LLMs, agentic systems, AI evaluation, and production machine learning."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rohithsiliveri.com" />
@@ -39,12 +39,30 @@
     <meta name="twitter:title" content="Rohith Siliveri" />
     <meta
       name="twitter:description"
-      content="AI/ML Engineer specializing in production ML systems, MLOps, and applied AI."
+      content="Applied AI Engineer focused on Generative AI, LLMs, agentic systems, and AI evaluation."
     />
     <meta
       name="twitter:image"
       content="https://rohithsiliveri.com/og-image.png"
     />
+    <script>
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
   </head>
 
   <body>

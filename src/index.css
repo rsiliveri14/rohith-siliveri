@@ -99,6 +99,17 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Poppins', sans-serif;
   }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 80;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }
 
 @layer components {
@@ -124,6 +135,37 @@
 
   .nav-link {
     @apply text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium;
+  }
+
+  .section-grid {
+    background-image:
+      linear-gradient(hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  .shine-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 35%,
+      hsl(var(--foreground) / 0.08) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+
+  .shine-card:hover::after {
+    animation: cardShine 0.85s ease;
   }
 }
 
@@ -170,6 +212,7 @@
 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
+    .shine-card:hover::after,
     .animate-fade-in,
     .animate-fade-in-up,
     .animate-slide-in-left,
@@ -232,5 +275,23 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes cardShine {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes floatOrb {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(24px, -30px, 0);
   }
 }

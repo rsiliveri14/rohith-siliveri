@@ -2,15 +2,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const LoadingScreen = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return !sessionStorage.getItem('rs-visited');
+  });
 
   useEffect(() => {
+    if (!isLoading) return;
     const timer = setTimeout(() => {
+      sessionStorage.setItem('rs-visited', '1');
       setIsLoading(false);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isLoading]);
 
   return (
     <AnimatePresence>
@@ -46,7 +51,7 @@ const LoadingScreen = () => {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="text-muted-foreground text-sm mb-8"
             >
-              AI/ML Engineer
+              Applied AI Engineer
             </motion.p>
 
             {/* Loading Bar */}
@@ -63,6 +68,11 @@ const LoadingScreen = () => {
                 transition={{ duration: 1.5, ease: 'easeInOut' }}
               />
             </motion.div>
+            <motion.div
+              className="mt-8 mx-auto w-10 h-10 rounded-full border border-foreground/20 border-t-foreground"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: 'linear' }}
+            />
           </div>
         </motion.div>
       )}

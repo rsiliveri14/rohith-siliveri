@@ -5,13 +5,46 @@ import { useRef } from 'react';
 const experiences = [
   {
     company: 'PNC Financial Services',
-    role: 'AI/ML Engineer',
+    role: 'Applied AI Engineer',
     location: 'USA',
     period: 'Jul 2025 – Present',
     highlights: [
-      'Real-time fraud detection systems',
-      'Scalable MLOps pipelines on Azure',
-      'Kubernetes deployments with Docker & FastAPI',
+      'Own applied ML for banking — risk, fraud, documents, and decision support — with held-out evaluation and audit-ready runs',
+      'Build agent evaluations for banking AI with reproducible environments and measurable failure analysis',
+      'Separate model quality from prompt, tools, and infrastructure when production AI underperforms',
+    ],
+  },
+  {
+    company: 'Handshake AI',
+    role: 'AI Fellow / Reviewer / Specialist',
+    location: 'Remote',
+    period: 'Jan 2026 – Aug 2026',
+    highlights: [
+      'Built and evaluated SWE-bench, Terminal-Bench, and Harbor tasks from real software-engineering problems',
+      'Conducted blinded coding-agent evaluations and benchmark QA across reproducible environments',
+      'Contributed visual debugging and preference-ranking data for agent evaluation',
+    ],
+  },
+  {
+    company: 'Snorkel AI',
+    role: 'Expert AI Contributor',
+    location: 'Remote',
+    period: 'Mar 2026 – Aug 2026',
+    highlights: [
+      'Validated and repaired Harbor evaluation packages across environments, solutions, and verifiers',
+      'Rewrote over-prescriptive instructions into engineering-oriented tasks with objective checks',
+      'Authored computer-use GUI evaluations and GPU machine-learning benchmarks',
+    ],
+  },
+  {
+    company: 'Binghamton University',
+    role: 'Graduate Student Researcher',
+    location: 'NY',
+    period: 'Jan 2025 – May 2025',
+    highlights: [
+      'Faculty research: an end-to-end residential property valuation system, from housing data through a deployed app',
+      'Benchmarked five regressors; selected XGBoost after it beat a Linear Regression baseline of R² ≈ 0.69',
+      'Served the model with FastAPI, PostgreSQL, Docker, AWS EC2/S3, and GitHub Actions CI/CD',
     ],
   },
   {
@@ -20,20 +53,9 @@ const experiences = [
     location: 'India',
     period: 'Jan 2022 – Jul 2023',
     highlights: [
-      'Computer vision for claims automation',
-      'ML-based claims triage and churn prediction',
-      'AWS SageMaker deployments',
-    ],
-  },
-  {
-    company: 'Razorpay',
-    role: 'Data Scientist',
-    location: 'India',
-    period: 'May 2020 – Dec 2021',
-    highlights: [
-      'Fraud detection and risk analytics',
-      'Customer segmentation and A/B testing',
-      'Built predictive models for transaction scoring',
+      'Built claims-triage models for property and auto — features from claims, policy, and customer history, evaluated on precision, recall, and ROC-AUC so ops could flag high-severity and likely-fraud cases earlier',
+      'Shipped Airflow training pipelines with MLflow tracking, then served models as FastAPI services on Docker and Kubernetes for claim risk scoring and policy recommendations',
+      'Extracted fields from messy claim forms with OCR, spaCy, and Hugging Face, and trained XGBoost fraud models that treated fraud as a rare-class problem rather than raw accuracy',
     ],
   },
 ];
@@ -78,7 +100,7 @@ const Experience = () => {
   });
 
   return (
-    <section id="experience" ref={containerRef} className="w-full py-8 px-6 relative overflow-hidden bg-background">
+    <section id="experience" ref={containerRef} className="w-full py-20 px-6 relative overflow-hidden">
       <div className="container mx-auto">
         {/* Animated section header */}
         <motion.div
@@ -135,14 +157,15 @@ const Experience = () => {
                     [index % 2 === 0 ? 'right' : 'left']: '-26px',
                   }}
                   initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : { scale: 0 }}
-                  transition={{ delay: 0.3 + index * 0.2, duration: 0.4 }}
+                  animate={isInView ? { scale: [1, 1.25, 1] } : { scale: 0 }}
+                  transition={{ delay: 0.3 + index * 0.2, duration: 2.4, repeat: Infinity }}
                 />
 
                 <motion.div
-                  className="bg-background p-5 rounded-xl shadow-sm border border-border group cursor-default"
+                  className="bg-background p-5 rounded-xl shadow-sm border border-border group cursor-default shine-card"
                   whileHover={{ 
                     scale: 1.02,
+                    y: -4,
                     boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)',
                   }}
                   transition={{ duration: 0.3 }}

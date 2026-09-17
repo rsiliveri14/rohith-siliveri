@@ -71,11 +71,22 @@ const Hero = () => {
           {/* Profile Image with premium animation */}
           <motion.div variants={imageVariants}>
             <MagneticButton strength={0.1}>
-              <motion.div 
-                className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl relative group"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.4 }}
-              >
+              <div className="relative">
+                <motion.div
+                  className="absolute -inset-3 rounded-full border border-foreground/15"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div
+                  className="absolute -inset-6 rounded-full border border-dashed border-foreground/10"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div 
+                  className="w-56 h-56 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-border shadow-2xl relative group"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.4 }}
+                >
                 {/* Glow effect on hover */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
@@ -90,6 +101,7 @@ const Hero = () => {
                   transition={{ duration: 0.6 }}
                 />
               </motion.div>
+              </div>
             </MagneticButton>
           </motion.div>
 
@@ -116,12 +128,20 @@ const Hero = () => {
               className="overflow-hidden"
             >
               <motion.h1 
-                className="text-3xl md:text-5xl font-bold text-foreground mb-2"
-                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+                className="text-3xl md:text-5xl font-bold text-foreground mb-2 flex flex-wrap justify-center md:justify-start"
+                aria-label="Rohith Siliveri"
               >
-                Rohith Siliveri
+                {"Rohith Siliveri".split("").map((char, index) => (
+                  <motion.span
+                    key={`${char}-${index}`}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 + index * 0.035, duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+                    className={char === " " ? "w-2 md:w-3" : "inline-block"}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
               </motion.h1>
             </motion.div>
             
@@ -133,14 +153,14 @@ const Hero = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                AI / ML Engineer
+                Applied AI Engineer
               </motion.h2>
             </motion.div>
 
             {/* CTA Buttons with magnetic effect */}
             <motion.div 
               variants={itemVariants}
-              className="flex flex-wrap items-center justify-center md:justify-start mb-6 gap-[40px]"
+              className="flex flex-wrap items-center justify-center md:justify-start mb-6 gap-3 md:gap-4"
             >
               <MagneticButton strength={0.3}>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -150,7 +170,21 @@ const Hero = () => {
                     className="rounded-full px-5 border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-300 shadow-lg hover:shadow-xl"
                     asChild
                   >
-                    <a href="#projects">View Projects</a>
+                    <a href="#work">Work</a>
+                  </Button>
+                </motion.div>
+              </MagneticButton>
+              <MagneticButton strength={0.3}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full px-5 border-2 border-foreground/40 text-foreground hover:bg-foreground hover:text-background transition-all duration-300"
+                    asChild
+                  >
+                    <a href="/Rohith_Resume.docx" download="Rohith_Resume.docx">
+                      Resume
+                    </a>
                   </Button>
                 </motion.div>
               </MagneticButton>
@@ -173,9 +207,9 @@ const Hero = () => {
               className="flex items-center justify-center gap-4 -ml-[26px]"
             >
               {[
-                { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "LinkedIn" },
+                { href: "https://linkedin.com/in/rohith1411", icon: Linkedin, label: "LinkedIn" },
                 { href: "https://github.com/rsiliveri14", icon: Github, label: "GitHub" },
-                { href: "mailto:rohith.siliveri14@gmail.com", icon: Mail, label: "Email" },
+                { href: "mailto:rohith.career.ai@gmail.com", icon: Mail, label: "Email" },
               ].map((social, index) => (
                 <MagneticButton key={social.label} strength={0.4}>
                   <motion.a

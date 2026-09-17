@@ -16,7 +16,7 @@ const Contact = () => {
     e.preventDefault();
     const subject = `Contact from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    window.location.href = `mailto:rohith.siliveri14@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:rohith.career.ai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const containerVariants = {
@@ -43,20 +43,20 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { href: "mailto:rohith.siliveri14@gmail.com", icon: Mail, label: "rohith.siliveri14@gmail.com" },
-    { href: "https://linkedin.com/in/rohiths14", icon: Linkedin, label: "linkedin.com/in/rohiths14" },
+    { href: "mailto:rohith.career.ai@gmail.com", icon: Mail, label: "rohith.career.ai@gmail.com" },
+    { href: "https://linkedin.com/in/rohith1411", icon: Linkedin, label: "linkedin.com/in/rohith1411" },
     { href: "https://github.com/rsiliveri14", icon: Github, label: "github.com/rsiliveri14" },
   ];
 
   const footerLinks = [
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
-    { href: "#projects", label: "Projects" },
+    { href: "#work", label: "Work" },
     { href: "#contact", label: "Contact" },
   ];
 
   return (
-    <section id="contact" ref={containerRef} className="w-full py-8 px-6 bg-secondary">
+    <section id="contact" ref={containerRef} className="w-full py-20 px-6">
       <div className="container mx-auto max-w-4xl">
         {/* Animated section header */}
         <motion.div
