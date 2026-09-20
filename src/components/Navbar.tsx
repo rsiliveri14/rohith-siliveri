@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Download } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
 import { cinematicEase, getIntroDelay } from "@/lib/motion";
-import ResumeDownload from "./ResumeDownload";
 import { MEDIUM } from "@/lib/site";
 
 const navLinks = [
   { href: "/#hero", label: "Home", id: "hero" },
-  { href: "/#about", label: "About", id: "about" },
   { href: "/#experience", label: "Experience", id: "experience" },
   { href: "/#projects", label: "Projects", id: "projects" },
   { href: MEDIUM, label: "Blogs", id: "blogs", external: true },
@@ -119,19 +117,6 @@ const Navbar = () => {
               </MagneticButton>
             ))}
             <MagneticButton strength={0.2}>
-              <ResumeDownload>
-                <motion.button
-                  type="button"
-                  className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300 inline-flex"
-                  aria-label="Download resume"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Download size={18} />
-                </motion.button>
-              </ResumeDownload>
-            </MagneticButton>
-            <MagneticButton strength={0.2}>
               <motion.button
                 onClick={toggleTheme}
                 className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
@@ -157,15 +142,6 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <ResumeDownload>
-              <motion.button
-                type="button"
-                className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
-                aria-label="Download resume"
-              >
-                <Download size={18} />
-              </motion.button>
-            </ResumeDownload>
             <motion.button
               onClick={toggleTheme}
               className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
