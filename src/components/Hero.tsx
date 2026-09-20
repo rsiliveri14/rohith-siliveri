@@ -5,7 +5,8 @@ import profileImage from "@/assets/profile.jpg";
 import MagneticButton from "./MagneticButton";
 import { useRef, useState } from "react";
 import { cinematicEase, cinematicSpring, getIntroDelay } from "@/lib/motion";
-import { EMAIL, GITHUB, LINKEDIN, RESUME_FILENAME, RESUME_HREF } from "@/lib/site";
+import { EMAIL, GITHUB, LINKEDIN } from "@/lib/site";
+import ResumeDownload from "./ResumeDownload";
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -138,36 +139,15 @@ const Hero = () => {
                 </Button>
               </MagneticButton>
               <MagneticButton strength={0.25}>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full px-5 border-2 border-foreground/40"
-                  asChild
-                >
-                  <a href="#projects">Projects</a>
-                </Button>
-              </MagneticButton>
-              <MagneticButton strength={0.25}>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full px-5 border-2 border-foreground/40"
-                  asChild
-                >
-                  <a href={RESUME_HREF} download={RESUME_FILENAME}>
+                <ResumeDownload>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full px-5 border-2 border-foreground/40"
+                  >
                     Resume
-                  </a>
-                </Button>
-              </MagneticButton>
-              <MagneticButton strength={0.25}>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full px-5 border-2 border-foreground/40"
-                  asChild
-                >
-                  <a href="#contact">Contact</a>
-                </Button>
+                  </Button>
+                </ResumeDownload>
               </MagneticButton>
             </motion.div>
 

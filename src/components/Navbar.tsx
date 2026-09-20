@@ -5,7 +5,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
 import { cinematicEase, getIntroDelay } from "@/lib/motion";
-import { RESUME_FILENAME, RESUME_HREF } from "@/lib/site";
+import ResumeDownload from "./ResumeDownload";
 
 const navLinks = [
   { href: "/#hero", label: "Home", id: "hero" },
@@ -113,16 +113,17 @@ const Navbar = () => {
               </MagneticButton>
             ))}
             <MagneticButton strength={0.2}>
-              <motion.a
-                href={RESUME_HREF}
-                download={RESUME_FILENAME}
-                className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300 inline-flex"
-                aria-label="Download resume"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Download size={18} />
-              </motion.a>
+              <ResumeDownload>
+                <motion.button
+                  type="button"
+                  className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300 inline-flex"
+                  aria-label="Download resume"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Download size={18} />
+                </motion.button>
+              </ResumeDownload>
             </MagneticButton>
             <MagneticButton strength={0.2}>
               <motion.button
@@ -150,14 +151,15 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <motion.a
-              href={RESUME_HREF}
-              download={RESUME_FILENAME}
-              className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
-              aria-label="Download resume"
-            >
-              <Download size={18} />
-            </motion.a>
+            <ResumeDownload>
+              <motion.button
+                type="button"
+                className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
+                aria-label="Download resume"
+              >
+                <Download size={18} />
+              </motion.button>
+            </ResumeDownload>
             <motion.button
               onClick={toggleTheme}
               className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
