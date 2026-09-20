@@ -1,6 +1,8 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Building2, Calendar } from 'lucide-react';
 import { useRef } from 'react';
+import SectionHeader from './SectionHeader';
+import { cinematicEase, cinematicSpring, cinematicViewport, staggerContainer } from '@/lib/motion';
 
 const experiences = [
   {
@@ -19,6 +21,7 @@ const experiences = [
     role: 'AI Fellow / Reviewer / Specialist',
     location: 'Remote',
     period: 'Jan 2026 – Aug 2026',
+    note: 'Concurrent with PNC',
     highlights: [
       'Built and evaluated SWE-bench, Terminal-Bench, and Harbor tasks from real software-engineering problems',
       'Conducted blinded coding-agent evaluations and benchmark QA across reproducible environments',
@@ -30,6 +33,7 @@ const experiences = [
     role: 'Expert AI Contributor',
     location: 'Remote',
     period: 'Mar 2026 – Aug 2026',
+    note: 'Concurrent with PNC',
     highlights: [
       'Validated and repaired Harbor evaluation packages across environments, solutions, and verifiers',
       'Rewrote over-prescriptive instructions into engineering-oriented tasks with objective checks',
@@ -61,9 +65,10 @@ const experiences = [
 ];
 
 const Experience = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
-  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, cinematicViewport);
+  const prefersReducedMotion = useReducedMotion();
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -71,138 +76,100 @@ const Experience = () => {
 
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
   const cardVariants = (index: number) => ({
-    hidden: { 
-      opacity: 0, 
-      x: index % 2 === 0 ? -80 : 80,
-      scale: 0.9,
+    hidden: {
+      opacity: 0,
+      x: prefersReducedMotion ? 0 : index % 2 === 0 ? -64 : 64,
+      y: prefersReducedMotion ? 0 : 24,
+      scale: prefersReducedMotion ? 1 : 0.96,
     },
     visible: {
       opacity: 1,
       x: 0,
+      y: 0,
       scale: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.4, 0.25, 1],
+        duration: 0.85,
+        ease: cinematicEase,
       },
     },
   });
 
   return (
-    <section id="experience" ref={containerRef} className="w-full py-20 px-6 relative overflow-hidden">
+    <div ref={containerRef} className="w-full py-20 px-6 relative overflow-hidden">
       <div className="container mx-auto">
-        {/* Animated section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-10"
-        >
-          <motion.p 
-            className="section-title-small"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            My Journey
-          </motion.p>
-          <motion.h2 
-            className="section-title"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          >
-            Experience
-          </motion.h2>
-        </motion.div>
+        <SectionHeader eyebrow="Career" title="Experience" />
+        <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto mb-10 -mt-4">
+          Handshake AI and Snorkel AI were specialist evaluation engagements in 2026, alongside the full-time Applied AI role at PNC.
+        </p>
 
         <div className="max-w-3xl mx-auto relative">
-          {/* Animated timeline line */}
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border transform -translate-x-1/2 hidden md:block">
             <motion.div
-              className="w-full bg-foreground/30"
+              className="w-full bg-foreground/30 origin-top"
               style={{ height: lineHeight }}
             />
           </div>
 
           <motion.div
-            variants={containerVariants}
+            variants={staggerContainer}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             className="space-y-6"
           >
             {experiences.map((exp, index) => (
               <motion.div
-                key={index}
+                key={exp.company}
                 variants={cardVariants(index)}
                 className={`relative md:w-[calc(50%-20px)] ${
                   index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
                 }`}
               >
-                {/* Timeline dot */}
                 <motion.div
                   className="hidden md:block absolute top-6 w-3 h-3 rounded-full bg-foreground border-2 border-background z-10"
                   style={{
                     [index % 2 === 0 ? 'right' : 'left']: '-26px',
                   }}
                   initial={{ scale: 0 }}
-                  animate={isInView ? { scale: [1, 1.25, 1] } : { scale: 0 }}
-                  transition={{ delay: 0.3 + index * 0.2, duration: 2.4, repeat: Infinity }}
+                  animate={isInView ? { scale: 1 } : { scale: 0 }}
+                  transition={{ delay: 0.2 + index * 0.08, duration: 0.45, ease: cinematicEase }}
                 />
 
                 <motion.div
                   className="bg-background p-5 rounded-xl shadow-sm border border-border group cursor-default shine-card"
-                  whileHover={{ 
-                    scale: 1.02,
-                    y: -4,
-                    boxShadow: '0 20px 40px -15px rgba(0,0,0,0.3)',
-                  }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          scale: 1.02,
+                          y: -6,
+                          boxShadow: '0 20px 40px -15px hsl(var(--foreground) / 0.28)',
+                        }
+                  }
+                  transition={cinematicSpring}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <motion.div 
-                      className="flex items-center gap-2"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                      transition={{ delay: 0.4 + index * 0.2, duration: 0.5 }}
-                    >
+                    <div className="flex items-center gap-2">
                       <Building2 size={16} className="text-muted-foreground" />
                       <span className="font-semibold text-foreground text-sm">{exp.company}</span>
-                    </motion.div>
-                    <motion.div 
-                      className="flex items-center gap-2 text-xs text-muted-foreground mt-1 sm:mt-0"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                      transition={{ delay: 0.5 + index * 0.2, duration: 0.5 }}
-                    >
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1 sm:mt-0">
                       <Calendar size={12} />
                       <span>{exp.period}</span>
-                    </motion.div>
+                    </div>
                   </div>
                   <h3 className="font-bold text-foreground mb-2">{exp.role}</h3>
+                  {exp.note ? (
+                    <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-2">
+                      {exp.note}
+                    </p>
+                  ) : null}
                   <ul className="space-y-1">
-                    {exp.highlights.map((highlight, i) => (
-                      <motion.li 
-                        key={i} 
-                        className="flex items-start gap-2 text-muted-foreground text-sm"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                        transition={{ delay: 0.6 + index * 0.2 + i * 0.1, duration: 0.4 }}
-                      >
+                    {exp.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start gap-2 text-muted-foreground text-sm">
                         <span className="text-foreground mt-1">•</span>
                         <span>{highlight}</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </motion.div>
@@ -211,7 +178,7 @@ const Experience = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

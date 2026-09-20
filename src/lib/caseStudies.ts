@@ -11,6 +11,7 @@ export interface CaseStudy {
   location: string;
   title: string;
   summary: string;
+  result: string;
   tags: string[];
   problem: string[];
   sections: CaseStudySection[];
@@ -27,6 +28,8 @@ export const caseStudies: CaseStudy[] = [
     title: 'Building & Evaluating Coding-Agent Benchmarks',
     summary:
       'I authored evaluation tasks, built reproducible Docker environments, designed verification logic, scored coding-agent runs, and reviewed benchmark quality across SWE-bench-style, Terminal-Bench, visual, and preference work.',
+    result:
+      'Rerunnable SWE-bench and Harbor tasks with independent tests — so another person can score the same agent the same way.',
     tags: [
       'SWE-bench',
       'Terminal-Bench',
@@ -89,6 +92,8 @@ export const caseStudies: CaseStudy[] = [
     title: 'Validating & Repairing Agent Evaluation Packages',
     summary:
       'I contributed to agentic coding benchmarks, evaluation-package validation and repair, rubric-based codebase tasks, computer-use workflows, and GPU-based machine-learning benchmarks.',
+    result:
+      'Repaired Harbor packages and verifiers so a pass reflected the agent, not leakage or a gameable check.',
     tags: [
       'Harbor',
       'Agentic AI',

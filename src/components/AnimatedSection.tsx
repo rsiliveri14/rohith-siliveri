@@ -17,16 +17,16 @@ const AnimatedSection = ({
 }: AnimatedSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { 
-    once: false, 
-    margin: '-10% 0px -10% 0px',
-    amount: 0.2
+    once: true, 
+    margin: '-8% 0px',
+    amount: 0.18
   });
 
   const getVariants = () => {
     const baseTransition = {
-      duration: 0.7,
+      duration: 0.85,
       delay,
-      ease: [0.25, 0.4, 0.25, 1],
+      ease: [0.16, 1, 0.3, 1],
     };
 
     switch (direction) {

@@ -1,187 +1,95 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Briefcase, GraduationCap } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { Briefcase, GraduationCap, ShieldCheck } from "lucide-react";
 import aboutImage from "@/assets/about.jpg";
 import { useRef } from "react";
+import SectionHeader from "./SectionHeader";
+import { cinematicEase, cinematicSpring, cinematicViewport, fadeUp, staggerContainer } from "@/lib/motion";
 
 const About = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.9, clipPath: 'inset(100% 0 0 0)' },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      clipPath: 'inset(0% 0 0 0)',
-      transition: {
-        duration: 0.9,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
-  };
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, cinematicViewport);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="about" ref={containerRef} className="w-full py-20 px-6">
-      <div className="container mx-auto">
-        {/* Animated section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-10"
-        >
-          <motion.p 
-            className="section-title-small"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Get To Know More
-          </motion.p>
-          <motion.h2 
-            className="section-title"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          >
-            About Me
-          </motion.h2>
-        </motion.div>
+    <div ref={containerRef} className="w-full py-20 px-6">
+      <div className="container mx-auto max-w-5xl">
+        <SectionHeader eyebrow="Background" title="About" />
 
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16"
         >
-          {/* About Image with parallax */}
-          <motion.div 
-            className="lg:w-1/4"
-            style={{ y: imageY }}
+          <motion.div
+            variants={fadeUp}
+            className="lg:w-1/3 flex justify-center"
           >
             <motion.div
-              variants={imageVariants}
-              className="w-48 h-60 md:w-56 md:h-72 rounded-2xl overflow-hidden shadow-xl cursor-pointer group relative"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.4 }}
+              className="w-48 h-60 md:w-56 md:h-72 rounded-2xl overflow-hidden group relative"
+              whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+              transition={cinematicSpring}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
-              />
-              <motion.img 
-                src={aboutImage} 
-                alt="Rohith Siliveri" 
+              <img
+                src={aboutImage}
+                alt="Rohith Siliveri"
                 className="w-full h-full object-cover"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6 }}
               />
             </motion.div>
           </motion.div>
 
-          {/* About Content with parallax */}
-          <motion.div 
-            className="lg:w-3/4"
-            style={{ y: contentY }}
-          >
-            {/* Info Cards with stagger */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
+          <motion.div className="lg:w-2/3 w-full" variants={fadeUp}>
+            <div className="grid grid-cols-3 gap-3 mb-6">
               {[
-                { icon: Briefcase, title: "Experience", value: "4+ Years" },
-                { icon: GraduationCap, title: "Education", value: "M.S. Computer Science" },
-              ].map((item, index) => (
+                { icon: Briefcase, title: "Experience", value: "4+ years" },
+                { icon: ShieldCheck, title: "Focus", value: "Eval + production" },
+                { icon: GraduationCap, title: "Education", value: "M.S. CS" },
+              ].map((item) => (
                 <motion.div
                   key={item.title}
-                  variants={itemVariants}
-                  className="info-card py-4 group"
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  transition={{ duration: 0.3 }}
+                  className="info-card py-4 px-2 group"
+                  whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+                  transition={cinematicSpring}
                 >
-                  <motion.div
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <item.icon className="w-6 h-6 mx-auto mb-2 text-foreground" />
-                  </motion.div>
-                  <h3 className="font-semibold text-sm mb-0.5">{item.title}</h3>
-                  <p className="text-muted-foreground text-xs">{item.value}</p>
+                  <item.icon className="w-5 h-5 mx-auto mb-2 text-foreground" />
+                  <h3 className="font-semibold text-xs mb-0.5">{item.title}</h3>
+                  <p className="text-muted-foreground text-[11px] leading-snug">{item.value}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* Bio */}
-            <motion.div
-              variants={itemVariants}
-              className="text-muted-foreground text-sm leading-relaxed text-center lg:text-left mb-6 space-y-4"
-            >
+            <div className="text-muted-foreground text-sm leading-relaxed text-center lg:text-left space-y-4">
               <p>
-                I’m an Applied AI Engineer working across production machine learning and AI evaluation. I build agentic
-                coding benchmarks and verification systems, and I apply the same discipline to production AI in banking and
-                insurance — where reliability, reproducibility, security, and auditability matter as much as model
-                performance.
+                I’m an Applied AI Engineer. I build coding-agent benchmarks and verifiers, and I apply the
+                same standard to production ML in banking and insurance — held-out evaluation,
+                reproducibility, and auditability, not just a leaderboard score.
               </p>
               <p>
-                In 2026, I worked across Handshake AI and Snorkel AI on SWE-bench, Terminal-Bench, Harbor, computer-use,
-                and GPU-based ML evaluation, spanning benchmark construction, evaluation infrastructure, model assessment,
-                and quality review. Earlier, I worked on applied AI systems across banking, insurance, and research,
-                including fraud detection, claims intelligence, document NLP, and predictive modeling.
+                In 2026 I contributed to Handshake AI and Snorkel AI evaluation programs{' '}
+                <span className="text-foreground">alongside my full-time role at PNC</span> — SWE-bench,
+                Terminal-Bench, Harbor, computer-use, and GPU ML benches. Earlier work covered fraud,
+                claims intelligence, document NLP, and deployed predictive models.
               </p>
-            </motion.div>
+            </div>
 
-            {/* Education Details */}
-            <div className="space-y-2">
+            <div className="space-y-2 mt-6">
               {[
                 { degree: "M.S. Computer Science (AI)", school: "SUNY Binghamton, NY" },
                 { degree: "B.Tech Computer Science", school: "Anurag University, India" },
-              ].map((edu, index) => (
-                <motion.div 
+              ].map((edu) => (
+                <div
                   key={edu.degree}
-                  variants={itemVariants}
-                  className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl group cursor-default"
-                  whileHover={{ scale: 1.01, x: 5 }}
-                  transition={{ duration: 0.3 }}
+                  className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 bg-secondary rounded-xl"
                 >
-                  <div>
-                    <p className="font-medium text-sm">{edu.degree}</p>
-                    <p className="text-xs text-muted-foreground">{edu.school}</p>
-                  </div>
-                </motion.div>
+                  <p className="font-medium text-sm">{edu.degree}</p>
+                  <p className="text-xs text-muted-foreground">{edu.school}</p>
+                </div>
               ))}
             </div>
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

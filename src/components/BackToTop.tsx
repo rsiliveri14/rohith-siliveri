@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { cinematicEase, cinematicSpring } from '@/lib/motion';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,10 +30,11 @@ const BackToTop = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          initial={{ opacity: 0, scale: 0.85, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          whileHover={{ scale: 1.1, y: -2 }}
+          exit={{ opacity: 0, scale: 0.85, y: 16 }}
+          transition={{ duration: 0.45, ease: cinematicEase }}
+          whileHover={{ scale: 1.08, y: -3, transition: cinematicSpring }}
           whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-foreground text-background shadow-lg hover:shadow-xl transition-shadow duration-300"

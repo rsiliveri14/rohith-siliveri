@@ -5,11 +5,12 @@ import MagneticButton from './MagneticButton';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const footerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(footerRef, { once: false, margin: "-10%" });
+  const isInView = useInView(footerRef, { once: true, margin: "-10%" });
 
   const links = [
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
+    { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
   ];
 

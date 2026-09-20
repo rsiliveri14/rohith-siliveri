@@ -1,14 +1,18 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { Mail, Linkedin, Github, Send } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import MagneticButton from './MagneticButton';
+import SectionHeader from './SectionHeader';
+import { cinematicEase, cinematicSpring, cinematicViewport, fadeUp, staggerContainer } from '@/lib/motion';
+import { EMAIL, GITHUB, LINKEDIN } from '@/lib/site';
 
 const Contact = () => {
-  const containerRef = useRef<HTMLElement>(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-15%" });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, cinematicViewport);
+  const prefersReducedMotion = useReducedMotion();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const currentYear = new Date().getFullYear();
 
@@ -16,72 +20,34 @@ const Contact = () => {
     e.preventDefault();
     const subject = `Contact from ${formData.name}`;
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    window.location.href = `mailto:rohith.career.ai@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
+  const containerVariants = staggerContainer;
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
-  };
+  const itemVariants = fadeUp;
 
   const socialLinks = [
-    { href: "mailto:rohith.career.ai@gmail.com", icon: Mail, label: "rohith.career.ai@gmail.com" },
-    { href: "https://linkedin.com/in/rohith1411", icon: Linkedin, label: "linkedin.com/in/rohith1411" },
-    { href: "https://github.com/rsiliveri14", icon: Github, label: "github.com/rsiliveri14" },
+    { href: `mailto:${EMAIL}`, icon: Mail, label: EMAIL },
+    { href: LINKEDIN, icon: Linkedin, label: "linkedin.com/in/rohith1411" },
+    { href: GITHUB, icon: Github, label: "github.com/rsiliveri14" },
   ];
 
   const footerLinks = [
     { href: "#about", label: "About" },
     { href: "#experience", label: "Experience" },
     { href: "#work", label: "Work" },
+    { href: "#projects", label: "Projects" },
     { href: "#contact", label: "Contact" },
   ];
 
   return (
-    <section id="contact" ref={containerRef} className="w-full py-20 px-6">
+    <div ref={containerRef} className="w-full py-20 px-6">
       <div className="container mx-auto max-w-4xl">
-        {/* Animated section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-10"
-        >
-          <motion.p 
-            className="section-title-small"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Get in Touch
-          </motion.p>
-          <motion.h2 
-            className="section-title"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            animate={isInView ? { clipPath: 'inset(0 0% 0 0)' } : { clipPath: 'inset(0 100% 0 0)' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          >
-            Contact Me
-          </motion.h2>
-        </motion.div>
+        <SectionHeader eyebrow="Get in Touch" title="Contact" />
+        <p className="text-center text-sm text-muted-foreground max-w-xl mx-auto mb-10 -mt-4">
+          The form opens your email app with the message filled in. Or write me directly.
+        </p>
 
         <motion.div
           variants={containerVariants}
@@ -100,9 +66,9 @@ const Contact = () => {
             ].map((field, index) => (
               <motion.div
                 key={field.key}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.6, ease: cinematicEase }}
               >
                 <Input
                   type={field.type}
@@ -115,9 +81,9 @@ const Contact = () => {
               </motion.div>
             ))}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: prefersReducedMotion ? 0 : -24 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: cinematicEase }}
             >
               <Textarea
                 placeholder="Your Message"
@@ -129,9 +95,9 @@ const Contact = () => {
               />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+              transition={{ delay: 0.5, duration: 0.6, ease: cinematicEase }}
             >
               <MagneticButton strength={0.2}>
                 <motion.div
@@ -163,11 +129,11 @@ const Contact = () => {
                   className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
                     hover:shadow-lg hover:border-foreground/30
                     transition-all duration-300 cursor-pointer group"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ scale: 1.02, y: -3 }}
+                  initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: prefersReducedMotion ? 0 : 24 }}
+                  whileHover={prefersReducedMotion ? undefined : { scale: 1.02, y: -4, transition: cinematicSpring }}
                   whileTap={{ scale: 0.98 }}
+                  transition={{ delay: 0.28 + index * 0.1, duration: 0.6, ease: cinematicEase }}
                 >
                   <motion.div
                     whileHover={{ rotate: 10, scale: 1.1 }}
@@ -227,7 +193,7 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

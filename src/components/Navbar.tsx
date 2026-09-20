@@ -4,12 +4,15 @@ import { Menu, X, Moon, Sun, Download } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
+import { cinematicEase, getIntroDelay } from "@/lib/motion";
+import { RESUME_FILENAME, RESUME_HREF } from "@/lib/site";
 
 const navLinks = [
   { href: "/#hero", label: "Home", id: "hero" },
   { href: "/#about", label: "About", id: "about" },
   { href: "/#experience", label: "Experience", id: "experience" },
   { href: "/#work", label: "Work", id: "work" },
+  { href: "/#projects", label: "Projects", id: "projects" },
   { href: "/#skills", label: "Skills", id: "skills" },
   { href: "/#contact", label: "Contact", id: "contact" },
 ];
@@ -17,6 +20,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [introDelay] = useState(() => getIntroDelay());
   const { isDark, toggleTheme } = useTheme();
   const activeSection = useActiveSection();
 
@@ -45,9 +49,9 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+      transition={{ duration: 0.8, delay: introDelay, ease: cinematicEase }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
           ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border/50" 
@@ -74,14 +78,14 @@ const Navbar = () => {
                 <motion.a
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
+                  className={`relative px-3 py-2 text-sm font-semibold transition-colors duration-300 ${
                     activeSection === link.id 
                       ? 'text-foreground' 
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05, duration: 0.5 }}
+                  transition={{ delay: introDelay + 0.08 + index * 0.05, duration: 0.55, ease: cinematicEase }}
                   whileHover={{ y: -2 }}
                 >
                   {link.label}
@@ -110,8 +114,8 @@ const Navbar = () => {
             ))}
             <MagneticButton strength={0.2}>
               <motion.a
-                href="/Rohith_Resume.docx"
-                download="Rohith_Resume.docx"
+                href={RESUME_HREF}
+                download={RESUME_FILENAME}
                 className="p-2.5 ml-1 rounded-full border border-border hover:bg-secondary hover:border-foreground/30 transition-all duration-300 inline-flex"
                 aria-label="Download resume"
                 whileHover={{ scale: 1.1 }}
@@ -147,8 +151,8 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
             <motion.a
-              href="/Rohith_Resume.docx"
-              download="Rohith_Resume.docx"
+              href={RESUME_HREF}
+              download={RESUME_FILENAME}
               className="p-2 rounded-full border border-border hover:bg-secondary transition-colors"
               aria-label="Download resume"
             >

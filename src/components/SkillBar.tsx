@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { cinematicEase, cinematicViewport } from '@/lib/motion';
 
 interface SkillBarProps {
   name: string;
@@ -9,7 +10,7 @@ interface SkillBarProps {
 
 const SkillBar = ({ name, level, delay = 0 }: SkillBarProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: '-10% 0px' });
+  const isInView = useInView(ref, cinematicViewport);
 
   return (
     <div ref={ref} className="w-full">
@@ -25,7 +26,7 @@ const SkillBar = ({ name, level, delay = 0 }: SkillBarProps) => {
           transition={{
             duration: 1,
             delay,
-            ease: [0.25, 0.4, 0.25, 1],
+            ease: cinematicEase,
           }}
         />
       </div>

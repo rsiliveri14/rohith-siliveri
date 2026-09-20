@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { cn } from '@/lib/utils';
+import { cinematicEase } from '@/lib/motion';
 
 interface TextRevealProps {
   children: string;
@@ -17,9 +18,9 @@ const TextReveal = ({
 }: TextRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { 
-    once: false, 
-    margin: '-5% 0px -5% 0px',
-    amount: 0.5
+    once: true, 
+    margin: '-5% 0px',
+    amount: 0.4
   });
 
   const words = children.split(' ');
@@ -45,8 +46,8 @@ const TextReveal = ({
       y: 0,
       rotateX: 0,
       transition: {
-        duration: 0.5,
-        ease: [0.25, 0.4, 0.25, 1],
+        duration: 0.55,
+        ease: cinematicEase,
       },
     },
   };

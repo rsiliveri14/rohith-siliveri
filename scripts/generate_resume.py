@@ -87,7 +87,7 @@ def main():
         ],
     )
 
-    job(pdf, "AI Fellow / Reviewer / Specialist", "Handshake AI", "Jan 2026 - Aug 2026  |  Remote")
+    job(pdf, "AI Fellow / Reviewer / Specialist", "Handshake AI", "Jan 2026 - Aug 2026  |  Remote  |  Concurrent with PNC")
     bullets(
         pdf,
         [
@@ -97,7 +97,7 @@ def main():
         ],
     )
 
-    job(pdf, "Expert AI Contributor", "Snorkel AI", "Mar 2026 - Aug 2026  |  Remote")
+    job(pdf, "Expert AI Contributor", "Snorkel AI", "Mar 2026 - Aug 2026  |  Remote  |  Concurrent with PNC")
     bullets(
         pdf,
         [

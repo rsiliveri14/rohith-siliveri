@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import CaseStudies from '@/components/CaseStudies';
+import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import ParallaxBackground from '@/components/ParallaxBackground';
@@ -28,7 +29,7 @@ const Index = () => {
         <ScrollProgress />
         <Navbar />
         <main className="relative z-10 bg-background">
-          <section id="hero" className="min-h-screen flex items-center">
+          <section id="hero" className="min-h-screen flex items-center pt-24 overflow-hidden">
             <Hero />
           </section>
           <section id="about">
@@ -39,6 +40,9 @@ const Index = () => {
           </section>
           <section id="work">
             <CaseStudies />
+          </section>
+          <section id="projects">
+            <Projects />
           </section>
           <section id="skills">
             <Skills />
