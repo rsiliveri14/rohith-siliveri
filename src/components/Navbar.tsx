@@ -6,14 +6,14 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "./MagneticButton";
 import { cinematicEase, getIntroDelay } from "@/lib/motion";
 import ResumeDownload from "./ResumeDownload";
+import { MEDIUM } from "@/lib/site";
 
 const navLinks = [
   { href: "/#hero", label: "Home", id: "hero" },
   { href: "/#about", label: "About", id: "about" },
   { href: "/#experience", label: "Experience", id: "experience" },
-  { href: "/#work", label: "Work", id: "work" },
   { href: "/#projects", label: "Projects", id: "projects" },
-  { href: "/#skills", label: "Skills", id: "skills" },
+  { href: MEDIUM, label: "Blogs", id: "blogs", external: true },
   { href: "/#contact", label: "Contact", id: "contact" },
 ];
 
@@ -32,7 +32,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external?: boolean) => {
+    if (external) {
+      setIsOpen(false);
+      return;
+    }
     e.preventDefault();
     const hash = href.includes('#') ? `#${href.split('#')[1]}` : href;
     if (window.location.pathname !== '/') {
@@ -77,7 +81,9 @@ const Navbar = () => {
               <MagneticButton key={link.href} strength={0.15}>
                 <motion.a
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => handleNavClick(e, link.href, link.external)}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
                   className={`relative px-3 py-2 text-sm font-semibold transition-colors duration-300 ${
                     activeSection === link.id 
                       ? 'text-foreground' 
@@ -213,7 +219,9 @@ const Navbar = () => {
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
+                    onClick={(e) => handleNavClick(e, link.href, link.external)}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
                     className={`py-2 px-3 rounded-lg text-sm font-semibold transition-colors ${
                       activeSection === link.id 
                         ? 'text-foreground bg-foreground/5' 

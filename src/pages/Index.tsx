@@ -14,7 +14,17 @@ import ScrollProgress from '@/components/ScrollProgress';
 
 const Index = () => {
   useEffect(() => {
-    if (!window.location.hash) return;
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    const isReload = nav?.type === 'reload';
+
+    if (isReload || !window.location.hash) {
+      window.scrollTo(0, 0);
+      if (isReload && window.location.hash) {
+        history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+      }
+      return;
+    }
+
     const timer = window.setTimeout(() => {
       document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'smooth' });
     }, sessionStorage.getItem('rs-visited') ? 80 : 2200);
