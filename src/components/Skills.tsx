@@ -150,8 +150,8 @@ const Skills = () => {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div ref={containerRef} className="w-full py-20 px-6">
-      <div className="container mx-auto max-w-4xl">
+    <div ref={containerRef} className="w-full py-20">
+      <div className="page-shell">
         <SectionHeader
           eyebrow="Stack"
           title="Skills"
@@ -163,7 +163,7 @@ const Skills = () => {
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {skillCategories.map((category) => {
             const IconComponent = category.icon;

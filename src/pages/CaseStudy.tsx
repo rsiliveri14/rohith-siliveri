@@ -35,9 +35,9 @@ const CaseStudy = () => {
       <ParallaxBackground />
       <ScrollProgress />
       <Navbar />
-      <main className="relative z-10 pt-24 pb-20 px-6">
+      <main className="relative z-10 pt-24 pb-20">
         <motion.article
-          className="container mx-auto max-w-3xl"
+          className="page-shell"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
@@ -52,99 +52,103 @@ const CaseStudy = () => {
             </Link>
           </motion.div>
 
-          <motion.header variants={fadeUp} className="mb-10">
-            <p className="section-title-small mb-3">
-              {study.company} · {study.role}
-            </p>
-            <motion.h1
-              className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4"
-              variants={clipReveal}
-            >
-              {study.title}
-            </motion.h1>
-            <p className="text-muted-foreground text-sm mb-4">
-              {study.period} · {study.location}
-            </p>
-            <p className="text-sm text-foreground leading-relaxed mb-5">
-              {study.result}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {study.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2.5 py-1 rounded-full bg-secondary border border-border text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.header>
-
-          <motion.section variants={fadeUp} className="mb-12">
-            <h2 className="text-lg font-semibold mb-3">Overview</h2>
-            <div className="space-y-4">
-              {study.problem.map((paragraph) => (
-                <p key={paragraph.slice(0, 48)} className="text-muted-foreground text-sm leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </motion.section>
-
-          {study.sections.map((section) => (
-            <motion.section
-              key={section.heading}
-              variants={fadeUp}
-              className="mb-10"
-            >
-              <h2 className="text-lg font-semibold mb-3">{section.heading}</h2>
-              <div className="space-y-4">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph.slice(0, 40)} className="text-muted-foreground text-sm leading-relaxed">
-                    {paragraph}
-                  </p>
+          <div className="grid gap-10 lg:grid-cols-[minmax(280px,0.85fr)_minmax(0,1.4fr)] lg:gap-16 xl:gap-24">
+            <motion.header variants={fadeUp} className="lg:sticky lg:top-28 lg:self-start">
+              <p className="section-title-small mb-3">
+                {study.company} · {study.role}
+              </p>
+              <motion.h1
+                className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4"
+                variants={clipReveal}
+              >
+                {study.title}
+              </motion.h1>
+              <p className="text-muted-foreground text-sm mb-4">
+                {study.period} · {study.location}
+              </p>
+              <p className="text-sm text-foreground leading-relaxed mb-5">
+                {study.result}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {study.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2.5 py-1 rounded-full bg-secondary border border-border text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
-            </motion.section>
-          ))}
+            </motion.header>
 
-          <motion.section
-            variants={fadeUp}
-            className="mb-16 p-5 rounded-2xl border border-border bg-card"
-          >
-            <h2 className="text-lg font-semibold mb-4">What I learned</h2>
-            <ul className="space-y-3">
-              {study.takeaways.map((item) => (
-                <li key={item} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
-                  <span className="text-foreground mt-1">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.section>
+            <div>
+              <motion.section variants={fadeUp} className="mb-12">
+                <h2 className="text-lg font-semibold mb-3">Overview</h2>
+                <div className="space-y-4">
+                  {study.problem.map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)} className="text-muted-foreground text-sm leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </motion.section>
 
-          <motion.div variants={fadeUp} className="border-t border-border pt-10">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-4">The other role</p>
-            <div className="grid gap-3">
-              {others.map((item) => (
-                <motion.div key={item.slug} whileHover={cardHover} transition={cinematicSpring}>
-                  <Link
-                    to={`/work/${item.slug}`}
-                    className="group flex items-center justify-between gap-4 p-4 rounded-xl border border-border bg-card hover:border-foreground/30 transition-colors"
-                  >
-                    <div>
-                      <p className="text-xs text-muted-foreground mb-1">{item.company}</p>
-                      <p className="text-sm font-medium">{item.title}</p>
-                    </div>
-                    <ArrowUpRight
-                      size={16}
-                      className="shrink-0 text-muted-foreground group-hover:text-foreground transition-colors"
-                    />
-                  </Link>
-                </motion.div>
+              {study.sections.map((section) => (
+                <motion.section
+                  key={section.heading}
+                  variants={fadeUp}
+                  className="mb-10"
+                >
+                  <h2 className="text-lg font-semibold mb-3">{section.heading}</h2>
+                  <div className="space-y-4">
+                    {section.body.map((paragraph) => (
+                      <p key={paragraph.slice(0, 40)} className="text-muted-foreground text-sm leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </motion.section>
               ))}
+
+              <motion.section
+                variants={fadeUp}
+                className="mb-16 p-6 rounded-2xl border border-border bg-card"
+              >
+                <h2 className="text-lg font-semibold mb-4">What I learned</h2>
+                <ul className="space-y-3">
+                  {study.takeaways.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm text-muted-foreground leading-relaxed">
+                      <span className="text-foreground mt-1">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.section>
+
+              <motion.div variants={fadeUp} className="border-t border-border pt-10">
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-4">The other role</p>
+                <div className="grid gap-3">
+                  {others.map((item) => (
+                    <motion.div key={item.slug} whileHover={cardHover} transition={cinematicSpring}>
+                      <Link
+                        to={`/work/${item.slug}`}
+                        className="group flex items-center justify-between gap-4 p-4 rounded-xl border border-border bg-card hover:border-foreground/30 transition-colors"
+                      >
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">{item.company}</p>
+                          <p className="text-sm font-medium">{item.title}</p>
+                        </div>
+                        <ArrowUpRight
+                          size={16}
+                          className="shrink-0 text-muted-foreground group-hover:text-foreground transition-colors"
+                        />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </motion.article>
       </main>
       <BackToTop />

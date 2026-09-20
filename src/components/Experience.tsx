@@ -96,14 +96,14 @@ const Experience = () => {
   });
 
   return (
-    <div ref={containerRef} className="w-full py-20 px-6 relative overflow-hidden">
-      <div className="container mx-auto">
+    <div ref={containerRef} className="w-full py-20 relative overflow-hidden">
+      <div className="page-shell">
         <SectionHeader eyebrow="Career" title="Experience" />
-        <p className="text-center text-sm text-muted-foreground max-w-2xl mx-auto mb-10 -mt-4">
+        <p className="text-center text-sm text-muted-foreground max-w-3xl mx-auto mb-10 -mt-4">
           Handshake AI and Snorkel AI were specialist evaluation engagements in 2026, alongside the full-time Applied AI role at PNC.
         </p>
 
-        <div className="max-w-3xl mx-auto relative">
+        <div className="relative">
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border transform -translate-x-1/2 hidden md:block">
             <motion.div
               className="w-full bg-foreground/30 origin-top"

@@ -42,8 +42,8 @@ const Contact = () => {
   ];
 
   return (
-    <div ref={containerRef} className="w-full py-20 px-6">
-      <div className="container mx-auto max-w-4xl">
+    <div ref={containerRef} className="w-full py-20">
+      <div className="page-shell">
         <SectionHeader eyebrow="Get in Touch" title="Contact" />
         <p className="text-center text-sm text-muted-foreground max-w-xl mx-auto mb-10 -mt-4">
           The form opens your email app with the message filled in. Or write me directly.
@@ -121,12 +121,12 @@ const Contact = () => {
             className="space-y-3"
           >
             {socialLinks.map((link, index) => (
-              <MagneticButton key={link.label} strength={0.15}>
+              <MagneticButton key={link.label} strength={0.15} className="block w-full">
                 <motion.a
                   href={link.href}
                   target={link.href.startsWith('http') ? "_blank" : undefined}
                   rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 bg-card border border-border rounded-xl px-5 py-3 
+                  className="flex items-center gap-3 w-full bg-card border border-border rounded-xl px-5 py-3 
                     hover:shadow-lg hover:border-foreground/30
                     transition-all duration-300 cursor-pointer group"
                   initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 24 }}

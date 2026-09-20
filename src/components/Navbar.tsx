@@ -58,7 +58,7 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-3">
+      <div className="page-shell py-3">
         <div className="flex items-center justify-between">
           <MagneticButton strength={0.2}>
             <motion.a 

@@ -12,12 +12,12 @@ const CaseStudies = () => {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section ref={containerRef} className="w-full py-20 px-6 relative">
-      <div className="container mx-auto max-w-5xl relative">
+    <section ref={containerRef} className="w-full py-20 relative">
+      <div className="page-shell relative">
         <SectionHeader eyebrow="Evaluation work" title="Case studies" />
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           variants={staggerContainer}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -26,7 +26,7 @@ const CaseStudies = () => {
             <motion.div key={study.slug} variants={fadeScale}>
               <Link to={`/work/${study.slug}`} className="block h-full group">
                 <motion.article
-                  className="shine-card h-full bg-card border border-border rounded-2xl p-5 flex flex-col"
+                  className="shine-card h-full bg-card border border-border rounded-2xl p-6 lg:p-8 flex flex-col"
                   whileHover={prefersReducedMotion ? undefined : cardHover}
                   transition={cinematicSpring}
                 >

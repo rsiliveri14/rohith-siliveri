@@ -58,12 +58,12 @@ const Hero = () => {
   return (
     <motion.div
       ref={containerRef}
-      className="w-full py-16 md:py-8 px-6 flex items-center justify-center relative"
+      className="w-full py-16 md:py-8 flex items-center relative"
       style={{ opacity, scale }}
     >
-      <motion.div className="container mx-auto max-w-5xl" style={{ y }}>
+      <motion.div className="page-shell" style={{ y }}>
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-14"
+          className="flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -101,7 +101,7 @@ const Hero = () => {
             </MagneticButton>
           </motion.div>
 
-          <div className="w-full max-w-xl text-center md:text-left">
+          <div className="w-full flex-1 text-center md:text-left">
             <motion.p
               variants={itemVariants}
               className="text-xs font-medium tracking-[0.22em] uppercase text-muted-foreground mb-3"
@@ -111,14 +111,14 @@ const Hero = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl font-bold text-foreground leading-tight"
+              className="text-4xl md:text-5xl xl:text-6xl font-bold text-foreground leading-tight"
             >
               Rohith Siliveri
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="mt-4 text-sm md:text-base text-muted-foreground leading-relaxed"
+              className="mt-4 text-sm md:text-base lg:text-[17px] text-muted-foreground leading-relaxed max-w-xl md:max-w-none"
             >
               I design coding-agent evaluations and ship production ML for banking —
               so a score reflects the model, not a broken setup.

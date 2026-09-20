@@ -17,12 +17,12 @@ const Footer = () => {
   return (
     <motion.footer 
       ref={footerRef}
-      className="py-6 px-6 border-t border-border bg-background"
+      className="py-6 border-t border-border bg-background"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="container mx-auto">
+      <div className="page-shell">
         <motion.div 
           className="flex flex-col md:flex-row items-center justify-between gap-4"
           initial={{ y: 20 }}

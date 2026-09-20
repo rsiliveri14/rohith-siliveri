@@ -11,8 +11,8 @@ const About = () => {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div ref={containerRef} className="w-full py-20 px-6">
-      <div className="container mx-auto max-w-5xl">
+    <div ref={containerRef} className="w-full py-20">
+      <div className="page-shell">
         <SectionHeader eyebrow="Background" title="About" />
 
         <motion.div
